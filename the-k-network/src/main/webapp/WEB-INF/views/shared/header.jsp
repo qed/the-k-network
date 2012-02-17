@@ -18,19 +18,6 @@
 	
 	<link rel="stylesheet" href="/resources/css/bootstrap.css">
 	<link rel="stylesheet" href="/resources/css/knetwork.css">
-	<style type="text/css">
-	body {
-		padding-top: 60px;
-		background: url(/resources/img/body-bg.jpg) scroll
-	}
-	.label.superstar {
-  		background-color: #D4A017;
-	}
-	.scrollbox{
-		overflow-y:scroll;
-		height:10em;
-	}
-	</style>
 </head>
 
 <body>

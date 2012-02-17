@@ -1,3 +1,17 @@
+body {
+	padding-top: 60px;
+	background: url(/resources/img/body-bg.jpg) scroll
+}
+
+.label.superstar {
+	background-color: #D4A017;
+}
+
+.scrollbox {
+	overflow-y: scroll;
+	height: 10em;
+}
+
 .centered {
 	text-align: center;
 }
