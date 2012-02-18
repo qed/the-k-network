@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
-@Controller
+//@Controller
 public class LearningController {
     
     @Value("${twiddla.username}")
