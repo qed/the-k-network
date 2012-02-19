@@ -1,6 +1,5 @@
 body {
 	padding-top: 60px;
-	background: -webkit-gradient(linear, 100% 33%, 10% 40%, from(#99CCFF), to(white)) !important; 
 }
 
 .label.superstar {
@@ -16,50 +15,4 @@ body {
 	text-align: center;
 }
 
-.header {
-	margin-top: 50px;
-	margin-bottom: 60px;
-}
-
-.header p {
-	font-size: 30px;
-	line-height: 30px;
-	padding-top:10px;
-}
-
-.header h1 {
-	font-size: 60px;
-color: #222;
-text-shadow: 1px 2px 0px white;
-}
-
-.actionbuttons {
-	margin-top:40px;
-}
-
-
-.test {
-	padding: 20px;
-	margin-top: 5px;
-}
-
-.headerco {
-	padding-top:0px;
-	margin-bottom:25px;
-}
-
-.headerco p {
-	font-size: 24px;
-	line-height: 24px;
-} 
-
-.topshadow {
-	background: -webkit-gradient(linear, 90% 0%, 0% 90%, from(transparent), to(black)) !important; 
-	height:2px;
-}
-.mission {
-}
-
-.team {
-}
 

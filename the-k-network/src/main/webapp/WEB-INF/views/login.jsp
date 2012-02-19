@@ -1,41 +1,41 @@
 <%@ include file="../standard-include.jspf" %>
 <jsp:include page="shared/header.jsp" />
 	<!-- Main hero unit for a primary marketing message or call to action -->
-	<div class="container">
-		<div class="header centered">
-				<h1>The K-Network</h1>
-				<p>
-					A peer to peer network<br />
-					Khan Academy Driven<br />
-					Give help. Get help. On Demand<br />
-				</p>
-			<div class="actionbuttons centered">
-						<a class="btn primary large" href="">Start a Session!</a>
-						<a class="btn primary large" href="${requestTokenUrl}">Join our Network!</a>
-			</div>	
-		</div>
 
-		<div class="topshadow">
-		</div>
+<div class="container">
 
-		<div class="row headerco mission" id="mission">
-			<div class="test span14">
-				<h1>Our Mission</h1>
-			
-			<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras gravida malesuada libero. Suspendisse tristique enim quis dui porttitor et tempor tortor blandit. Donec scelerisque interdum luctus. In hac habitasse platea dictumst. Pellentesque iaculis mattis est, et dignissim massa vehicula sit amet. Fusce varius elementum hendrerit. Nunc id scelerisque leo. Vivamus varius nisl id metus faucibus vel tempor risus lacinia. Donec placerat lobortis dolor vel convallis. Mauris lobortis fringilla lacus, quis tristique mi commodo aliquam.
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="hero-unit">
+        <h1>The K-Network</h1>
+        <p>
+			A peer to peer network<br />
+			Khan Academy Driven<br />
+			Give help. Get help. On Demand<br />
+		</p>
+        <p>
+			<a class="btn primary large" href="">Start a Session!</a>
+			<a class="btn primary large" href="${requestTokenUrl}">Join our Network!</a>
+		</p>
 
-			</p>
-			</div>
-		</div>
+      </div>
 
-		<div class="row headerco team" id="team">
-			<div class="test span12 offset"> 
-				<h1>Our Team</h1>
-			</div>
-		</div>
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="span4">
+          <h2>Our Mission</h2>
+           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        </div>
+        <div class="span4 offset2">
+          <h2>Our Story</h2>
+           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+       </div>
+        <div class="span4 offset2">
+          <h2>Our Team</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        </div>
+      </div>
+
 </div>
-
-<jsp:include page="shared/footer.jsp" />
+	<jsp:include page="shared/footer.jsp" />
 						
 
