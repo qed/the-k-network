@@ -21,8 +21,8 @@
 </head>
 
 <body>
-	<div class="topbar">
-		<div class="fill">
+	<div class="navbar navbar-fixed-top">
+      		<div class="navbar-inner">
 			<div class="container">
 				<a class="brand" href="#"><fmt:message key="site.title"/></a>
 				<ul class="nav">
