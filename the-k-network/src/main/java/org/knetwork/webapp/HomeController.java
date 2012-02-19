@@ -1,5 +1,8 @@
 package org.knetwork.webapp;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -33,11 +36,12 @@ public class HomeController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String display(final HttpSession session, final HttpServletRequest request, final Model model) {
+    public String display(final HttpSession session, final HttpServletRequest request, final Model model) throws MalformedURLException {
         final Token accessToken = (Token) session.getAttribute("accessToken");
         model.addAttribute("loggedIn", accessToken != null);
         if (accessToken == null) {
-            final String callbackUrl = String.format("http://%s/%s", request.getServerName(), OAuthConstants.CALLBACK);
+            String authority = new URL(request.getRequestURL().toString()).getAuthority();
+            final String callbackUrl = String.format("http://%s/%s", authority, OAuthConstants.CALLBACK);
             logger.debug("Callback url for OAuth is: " + callbackUrl);
             final String requestTokenUrl = oauthService.getRequestTokenUrl(callbackUrl);
             model.addAttribute("requestTokenUrl", requestTokenUrl);
