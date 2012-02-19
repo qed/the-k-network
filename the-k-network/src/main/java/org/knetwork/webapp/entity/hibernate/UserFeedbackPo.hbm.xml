@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="org.knetwork.webapp.entity.hibernate.UserFeedbackPo" table="user_feedback">
+        <id name="userFeedbackId" type="java.lang.Long">
+            <column name="user_feedback_id"/>
+            <generator class="native" />
+        </id>
+        <property name="rating" type="int">
+            <column name="rating"/>
+        </property>
+        <property name="ratingDate" type="java.util.Date">
+        	<column name="rating_date"/>
+        </property>
+    </class>
+</hibernate-mapping>
