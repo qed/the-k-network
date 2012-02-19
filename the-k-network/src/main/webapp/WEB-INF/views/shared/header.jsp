@@ -26,9 +26,9 @@
 			<div class="container">
 				<a class="brand" href="#"><fmt:message key="site.title"/></a>
 				<ul class="nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#about">About</a></li>
-					<li><a href="#contact">Contact</a></li>
+					<li><a href="#mission">Our Mission</a></li>
+					<li><a href="#team">Our Team</a></li>
+					<li><a href="#contact">Contact Us</a></li>
 					<c:if test="${loggedIn}">
 						<li><a href="/logout">Logout</a></li>
 					</c:if>
@@ -36,4 +36,3 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
