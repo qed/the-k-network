@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="org.knetwork.webapp.entity.hibernate.UserFeedbackPo" table="user_feedback">
-        <id name="userFeedbackId" type="java.lang.Long">
+        <id name="userFeedbackId" type="int">
             <column name="user_feedback_id"/>
             <generator class="native" />
         </id>

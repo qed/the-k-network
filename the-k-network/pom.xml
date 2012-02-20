@@ -32,13 +32,13 @@
 			<version>5.1.9</version>
 		</dependency>
 		
+		<!-- Derby database driver -->
 		<dependency>
-			<groupId>hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<version>1.8.0.10</version>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<version>10.8.2.2</version>
 		</dependency>
-            
-	
+            		
 		<!-- Hibernate Core -->
 		<dependency>
 			<groupId>org.hibernate</groupId>

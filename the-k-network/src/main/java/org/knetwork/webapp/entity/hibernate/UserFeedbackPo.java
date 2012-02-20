@@ -7,15 +7,15 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class UserFeedbackPo extends BasePo implements Serializable {
 
 	private static final long serialVersionUID = 5114034041238284910L;
-	Long userFeedbackId;
+	Integer userFeedbackId;
 	Integer rating;
 	Date ratingDate = new Date();
 
-	public Long getUserFeedbackId() {
+	public Integer getUserFeedbackId() {
 		return userFeedbackId;
 	}
 
-	public void setUserFeedbackId(Long userFeedbackId) {
+	public void setUserFeedbackId(Integer userFeedbackId) {
 		this.userFeedbackId = userFeedbackId;
 	}
 

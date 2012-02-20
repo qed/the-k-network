@@ -41,7 +41,6 @@
 				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.connection.release_mode">auto</prop>
 				<prop key="hibernate.hbm2ddl.auto">${jdbc.ddl}</prop>
 			</props>
 		</property>
