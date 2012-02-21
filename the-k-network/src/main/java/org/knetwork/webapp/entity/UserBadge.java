@@ -1,9 +1,11 @@
 package org.knetwork.webapp.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserBadge {
+public class UserBadge implements Serializable {
 
+	private static final long serialVersionUID = 5080318996947944636L;
 	private String badgeName;
 	private Date date;
 	private Integer pointsEarned;

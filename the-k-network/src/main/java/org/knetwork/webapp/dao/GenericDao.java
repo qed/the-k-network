@@ -10,10 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(propagation = Propagation.SUPPORTS)
 public interface GenericDao {
 
-	public List createDynamicQuery(String dynamicQuery, String aliasName,
-			Class pojoClass, int start, int max, String orderByNames[],
-			boolean isAscending[]);
-
 	public List executeQuery(String strQuery);
 
 	public int executeUpdateQuery(String strQuery);

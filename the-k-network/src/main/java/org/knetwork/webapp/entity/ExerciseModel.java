@@ -1,9 +1,11 @@
 package org.knetwork.webapp.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ExerciseModel {
-	
+public class ExerciseModel implements Serializable {
+
+	private static final long serialVersionUID = 2705625858891579177L;
 	private String name;
 	private List<String> covers;
 	private String displayName;

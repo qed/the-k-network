@@ -10,6 +10,7 @@ public class UserFeedbackPo extends BasePo implements Serializable {
 	Integer userFeedbackId;
 	Integer rating;
 	Date ratingDate = new Date();
+	String userId;
 
 	public Integer getUserFeedbackId() {
 		return userFeedbackId;
@@ -37,6 +38,14 @@ public class UserFeedbackPo extends BasePo implements Serializable {
 	
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 }

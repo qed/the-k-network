@@ -1,7 +1,10 @@
 package org.knetwork.webapp.entity;
 
-public class ExerciseStates {
-	
+import java.io.Serializable;
+
+public class ExerciseStates implements Serializable {
+
+	private static final long serialVersionUID = -4108424449370968983L;
 	private boolean proficient;
 	private boolean reviewing;
 	private boolean struggling;

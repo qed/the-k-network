@@ -39,3 +39,5 @@
 		</div>
 	</div>
 </div>
+
+<jsp:include page="../user-feedback/view.jsp" />

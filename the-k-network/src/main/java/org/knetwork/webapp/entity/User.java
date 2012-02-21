@@ -1,11 +1,13 @@
 package org.knetwork.webapp.entity;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public class User {
-    
-    private List<String> allProficientExercises;
+public class User implements Serializable {
+
+	private static final long serialVersionUID = 4284784447589899327L;
+	private List<String> allProficientExercises;
     private Map<String, Integer> badgeCounts;
     private List<String> coaches;
     private String nickname;

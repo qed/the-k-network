@@ -47,31 +47,6 @@ public class GenericDaoImpl implements GenericDao {
 	private Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.knetwork.webapp.dao.GenericDao#createDynamicQuery(java.lang.String, java.lang.String, java.lang.Class, int, int, java.lang.String[], boolean[])
-	 */
-	@Override
-	public List createDynamicQuery(String dynamicQuery, String aliasName,
-			Class pojoClass, int start, int max, String orderByNames[],
-			boolean isAscending[]) {
-		dynamicQuery = appendOrderByClauseToQueryString(dynamicQuery,
-				orderByNames, isAscending);
-
-		SQLQuery q = getSession().createSQLQuery(dynamicQuery);
-
-		List results = null;
-
-		q.addEntity(aliasName, pojoClass);
-
-		q.setFirstResult(start);
-
-		q.setMaxResults(max);
-
-		results = q.list();
-
-		return results;
-	}
 
 	/* (non-Javadoc)
 	 * @see org.knetwork.webapp.dao.GenericDao#executeQuery(java.lang.String)

@@ -7,6 +7,9 @@
             <column name="user_feedback_id"/>
             <generator class="native" />
         </id>
+        <property name="userId" type="string">
+            <column name="user_id"/>
+        </property>
         <property name="rating" type="int">
             <column name="rating"/>
         </property>

@@ -1,9 +1,11 @@
 package org.knetwork.webapp.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Badge {
-	
+public class Badge implements Serializable {
+
+	private static final long serialVersionUID = -3808444217093145053L;
 	private Integer badgeCategory;
 	private String name;
 	private String description;

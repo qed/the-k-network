@@ -1,7 +1,10 @@
 package org.knetwork.webapp.entity;
 
-public class TargetContext {
+import java.io.Serializable;
 
+public class TargetContext implements Serializable {
+
+	private static final long serialVersionUID = 4064897682862251969L;
 	private String name;
 	private String displayName;
 	private String shortDisplayName;

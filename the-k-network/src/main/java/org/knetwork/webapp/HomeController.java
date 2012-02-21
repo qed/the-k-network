@@ -1,17 +1,10 @@
 package org.knetwork.webapp;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.knetwork.webapp.model.ExerciseContainer;
-import org.knetwork.webapp.oauth.KhanOAuthService;
-import org.knetwork.webapp.util.ApiHelper;
-import org.knetwork.webapp.util.KhanAcademyApi;
-import org.scribe.model.OAuthConstants;
 import org.scribe.model.Token;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,31 +19,16 @@ public class HomeController {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private final KhanOAuthService oauthService;
-    private final KhanAcademyApi api;
-
-    @Inject
-    public HomeController(final KhanOAuthService oauthService, final KhanAcademyApi api) {
-        this.oauthService = oauthService;
-        this.api = api;
-    }
-
     @RequestMapping(method = RequestMethod.GET)
     public String display(final HttpSession session, final HttpServletRequest request, final Model model) throws MalformedURLException {
         final Token accessToken = (Token) session.getAttribute("accessToken");
-        model.addAttribute("loggedIn", accessToken != null);
         if (accessToken == null) {
-            String authority = new URL(request.getRequestURL().toString()).getAuthority();
-            final String callbackUrl = String.format("http://%s/%s", authority, OAuthConstants.CALLBACK);
-            logger.debug("Callback url for OAuth is: " + callbackUrl);
-            final String requestTokenUrl = oauthService.getRequestTokenUrl(callbackUrl);
-            model.addAttribute("requestTokenUrl", requestTokenUrl);
+        	logger.debug("Not logged in, redirecting to login page.");
             return "login";
+        } else {
+        	logger.debug("Already logged in.");
+        	return "home";
         }
-        final ApiHelper apiHelper = new ApiHelper(accessToken, oauthService, api);
-        model.addAttribute("exercises", new ExerciseContainer(apiHelper.getExercises(), apiHelper.getBadges()));
-        model.addAttribute("user", apiHelper.getUser());
-        return "home";
     }
     
     @RequestMapping("logout")

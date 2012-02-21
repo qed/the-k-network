@@ -1,9 +1,11 @@
 package org.knetwork.webapp.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Exercise {
-	
+public class Exercise implements Serializable {
+
+	private static final long serialVersionUID = -8563576136189053083L;
 	private String exercise;
 	private ExerciseModel exerciseModel;
 	private ExerciseStates exerciseStates;

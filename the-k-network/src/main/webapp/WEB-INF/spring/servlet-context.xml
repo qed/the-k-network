@@ -15,14 +15,11 @@
 	<!-- Configures the @Controller programming model -->
 	<mvc:annotation-driven />
 
-	<!-- Forwards requests to the "/" resource to the "welcome" view 
-	<mvc:view-controller path="/" view-name="welcome"/> LEFT IN AS EXAMPLE
-	-->
-
 	<!-- Configures Handler Interceptors -->	
 	<mvc:interceptors>
 		<!-- Changes the locale when a 'locale' request parameter is sent; e.g. /?locale=de -->
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+		<bean class="org.knetwork.webapp.BaseInterceptor" />
 	</mvc:interceptors>
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources/ directory -->
