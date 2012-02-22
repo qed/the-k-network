@@ -18,13 +18,13 @@ import org.springframework.web.servlet.view.JstlView;
 public class ServletConfig {
     
     @Bean(name = "log4jInitializer")
-    public boolean initLog4j() throws FileNotFoundException {
+    public static boolean initLog4j() throws FileNotFoundException {
         Log4jConfigurer.initLogging("classpath:log4j.xml");
         return true;
     }
     
     @Bean(name = "messageSource")
-    public ReloadableResourceBundleMessageSource makeMessageSource() {
+    public static ReloadableResourceBundleMessageSource makeMessageSource() {
         final ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
 
         messageSource.setBasename("/WEB-INF/messages/messages");
@@ -34,14 +34,14 @@ public class ServletConfig {
     }
     
     @Bean(name = "knetworkConfig")
-    public PropertiesFactoryBean makeAppProperties() {
+    public static PropertiesFactoryBean makeAppProperties() {
         PropertiesFactoryBean bean = new PropertiesFactoryBean();
         bean.setLocation(new ClassPathResource("knetwork.properties"));
         return bean;
     }
 
     @Bean(name = "propertyConfigurer")
-    public PropertyPlaceholderConfigurer makePropertyConfigurer(@Value("#{knetworkConfig}") Properties properties) {
+    public static PropertyPlaceholderConfigurer makePropertyConfigurer(@Value("#{knetworkConfig}") Properties properties) {
         final PropertyPlaceholderConfigurer propertyConfigurer = new PropertyPlaceholderConfigurer();
 
         propertyConfigurer.setProperties(properties);
@@ -51,7 +51,7 @@ public class ServletConfig {
     }
 
     @Bean(name = "viewResolver")
-    public InternalResourceViewResolver makeViewResolver() {
+    public static InternalResourceViewResolver makeViewResolver() {
         final InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 
         viewResolver.setViewClass(JstlView.class);
