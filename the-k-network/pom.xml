@@ -223,6 +223,15 @@
 			<version>2.5</version>
 		</dependency>
 		
+		
+		<!-- Tokbox -->
+		<dependency>
+		    <groupId>com.tokbox</groupId>
+		    <artifactId>tokbox</artifactId>
+		    <version>1</version>
+		    <scope>system</scope>
+		    <systemPath>${basedir}/lib/opentok-api.jar</systemPath>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

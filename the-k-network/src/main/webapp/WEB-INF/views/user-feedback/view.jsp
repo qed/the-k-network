@@ -1,7 +1,7 @@
 <%@ include file="../../standard-include.jspf" %>
 
 <div class="container">
-	<h3>Rate this Learning Session</h3>
+	<h3>Rate this Session</h3>
 				
 	<div id="message"></div><br/>
 	<div id="star"></div>

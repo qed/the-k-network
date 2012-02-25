@@ -21,6 +21,7 @@
 	
 	<script type="text/javascript" src="resources/js/lib/jquery-1.7.1.js"></script>
 	<script type="text/javascript" src="resources/js/lib/raty/js/jquery.raty.js"></script>
+	<script src="http://staging.tokbox.com/v0.91/js/TB.min.js"></script>
 </head>
 
 <body>
@@ -41,3 +42,10 @@
 </div>
 
 <jsp:include page="../user-feedback/view.jsp" />
+
+	<div id="tokbox">
+	BOOM
+	</div>
+	<script type="text/javascript">
+		$("#tokbox").load("/tokbox/view");	
+	</script>

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.knetwork.webapp.model.ExerciseContainer;
 import org.knetwork.webapp.oauth.KhanOAuthService;
+import org.knetwork.webapp.service.TokboxService;
 import org.knetwork.webapp.util.ApiHelper;
 import org.knetwork.webapp.util.KhanAcademyApi;
 import org.scribe.model.OAuthConstants;
@@ -33,6 +34,7 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
 	
 	private KhanOAuthService oauthService;
     private KhanAcademyApi api;
+    private TokboxService tokboxService;
 	
 	@Override
 	public void afterCompletion(HttpServletRequest request,
@@ -88,6 +90,15 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
 	@Inject
 	public void setApi(KhanAcademyApi api) {
 		this.api = api;
+	}
+
+	public TokboxService getTokboxService() {
+		return tokboxService;
+	}
+
+	@Inject
+	public void setTokboxService(TokboxService tokboxService) {
+		this.tokboxService = tokboxService;
 	}
 
 }
