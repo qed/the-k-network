@@ -2,6 +2,7 @@ package org.knetwork.webapp.util;
 
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.UUID;
 
 public class SessionMapUtil {
 
@@ -9,6 +10,12 @@ public class SessionMapUtil {
 	private static final String TOKBOX = "TOKBOX";
 	
 	protected static Map<String, Map<String, String>> sessionMap = new Hashtable<String, Map<String, String>>();
+	
+	public static synchronized String generateLearningSessionId() {
+		String uuid = UUID.randomUUID().toString();
+		addLearningSessionToMap(uuid);
+		return uuid;
+	}
 	
 	public static void addLearningSessionToMap(String learningSessionId) {
 		if(!isLearningSessionMapped(learningSessionId)) {
