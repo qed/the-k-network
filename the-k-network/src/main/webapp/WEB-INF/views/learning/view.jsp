@@ -4,4 +4,6 @@
 
 <jsp:include page="../user-feedback/view.jsp" />
 
+<jsp:include page="../tokbox/include.jsp"/>
+ 
 <jsp:include page="../shared/footer.jsp" />

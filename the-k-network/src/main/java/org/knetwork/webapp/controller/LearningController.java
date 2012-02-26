@@ -1,38 +1,61 @@
 package org.knetwork.webapp.controller;
 
 import java.net.MalformedURLException;
+import java.util.Map;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.knetwork.webapp.service.TokboxService;
 import org.knetwork.webapp.util.SessionMapUtil;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.client.RestTemplate;
 
-//@Controller
+import com.opentok.exception.OpenTokException;
+
+@Controller
 public class LearningController {
     
-    @Value("${twiddla.username}")
-    private String username;
-    
-    @Value("${twiddla.password}")
-    private String password;
+	private final TokboxService tokboxService;
 
-    @RequestMapping("/")
+	@Inject
+	public LearningController(TokboxService tokboxService) {
+		super();
+		this.tokboxService = tokboxService;
+	}
+
+    @RequestMapping("learn/createMeeting")
     public String createNewMeeting(final HttpSession session, final HttpServletRequest request, final Model model) throws MalformedURLException {
-        // RestTemplate template = new RestTemplate();
-        // String sessionId = template.postForObject("http://www.twiddla.com/new.aspx?username={username}&password={password}", null, String.class, username, password);
-    	String sessionId = SessionMapUtil.generateLearningSessionId();
-    	model.addAttribute("learningSessionId", sessionId);
-        return String.format("redirect:learn/%s", sessionId);
+    	String learningSessionId = SessionMapUtil.generateLearningSessionId();
+    	model.addAttribute("learningSessionId", learningSessionId);
+    	session.setAttribute("learningSessionId",learningSessionId);
+    	try {
+			Map<String, String> tokboxMap = tokboxService.createSession();
+			String tokboxSessionId = tokboxMap.get("tokboxSessionId");
+			String moderatorToken  = tokboxMap.get("moderatorToken");
+			SessionMapUtil.addTokboxSessionId(learningSessionId, tokboxSessionId);
+			
+			System.out.println("Adding tokbox session id:" + tokboxSessionId + " to learning session:" + learningSessionId);
+			
+			model.addAttribute("tokboxSessionId", tokboxSessionId);
+			session.setAttribute("moderatorToken", moderatorToken);
+			session.setAttribute("tokboxSessionId", tokboxSessionId);
+		} catch (OpenTokException e) {
+			e.printStackTrace();
+		}
+    	
+        return String.format("redirect:/learn/join?learningSessionId=%s", learningSessionId);
     }
     
-    @RequestMapping("learn/{sessionId}")
-    public String displayLearningSession(@PathVariable String sessionId) {
+    @RequestMapping("learn/join")
+    public String displayLearningSession(final HttpSession session, final HttpServletRequest request, final Model model) throws MalformedURLException {
+    	String learningSessionId = (String)session.getAttribute("learningSessionId");
+    	System.out.println("Loading pages with learning session: " + learningSessionId);
+    	model.addAttribute("learningSessionId", learningSessionId);
         return "learning/view";
     }
+    
+    
 }

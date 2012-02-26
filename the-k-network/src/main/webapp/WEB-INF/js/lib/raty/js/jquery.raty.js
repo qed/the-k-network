@@ -448,7 +448,7 @@
 		iconRange:		undefined,
 		noRatedMsg:		'not rated yet',
 		number:			5,
-		path:			'resources/js/lib/raty/img',
+		path:			'/resources/js/lib/raty/img',
 		precision:		false,
 		round:			{ down: .25, full: .6, up: .76 },
 		readOnly:		false,

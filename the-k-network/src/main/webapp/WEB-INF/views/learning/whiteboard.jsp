@@ -1,1 +1,2 @@
-<iframe src="http://www.twiddla.com/api/start.aspx?sessionid=${sessionId}" width="800" height="600"></iframe>
+<%@ include file="../../standard-include.jspf" %>
+<b>Learning Session ID: ${learningSessionId}</b>

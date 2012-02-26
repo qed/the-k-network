@@ -12,9 +12,11 @@
 		var sessionId = '${tokboxSessionId}';
 		var token = 'devtoken'; // Should not be hard-coded.
 								// Add to the page using the OpenTok server-side libraries.
+								
+		alert("Tokbox session id: " + sessionId);
 </script>
 
-<script type="text/javascript" src="resources/js/knetwork-tokbox.js"></script>
+<script type="text/javascript" src="/resources/js/knetwork-tokbox.js"></script>
 	
 <div id="subscribers"></div>
 </div>	

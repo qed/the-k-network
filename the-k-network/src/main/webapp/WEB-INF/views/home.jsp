@@ -4,6 +4,9 @@
 		<div class="span12">
 			<h1>${user.nickname}</h1>
 		</div>
+		<div class="span12">
+			<a class="btn btn-primary btn-large" href="/learn">Start a Session</a>
+		</div>
 		<div class="column span6">
 			<h2>Proficient</h2>
 			<h3 class="label superstar">&#x2605; Super Star</h3>

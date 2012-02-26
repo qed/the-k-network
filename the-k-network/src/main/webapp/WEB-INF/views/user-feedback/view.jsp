@@ -10,7 +10,7 @@
 		$('#star').raty({
 		  click: function(score, evt) {
 		    $.ajax({
-		    	url:"user-feedback/rate?score="+score,
+		    	url:"/user-feedback/rate?score="+score,
 		    	success: function() {
 		    		$("#message").text("You just rated us " + score);
 		    	}

@@ -11,21 +11,19 @@
 package com.opentok.api;
 
 import java.net.URLEncoder;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 import java.util.Map;
+import java.util.Random;
 
-import com.opentok.api.constants.SessionProperties;
 import com.opentok.api.constants.RoleConstants;
+import com.opentok.api.constants.SessionProperties;
 import com.opentok.exception.OpenTokException;
 import com.opentok.util.Base64;
 import com.opentok.util.GenerateMac;
 import com.opentok.util.TokBoxXML;
-import com.opentok.api.OpenTokSession;
 
 public class OpenTokSDK {
 

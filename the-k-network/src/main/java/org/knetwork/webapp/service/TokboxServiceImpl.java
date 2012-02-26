@@ -1,5 +1,8 @@
 package org.knetwork.webapp.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -16,29 +19,8 @@ public class TokboxServiceImpl implements TokboxService {
 	
 	private OpenTokSession oSession;
 	private OpenTokSDK sdk;
-	
-	private String publisherToken;
-	private String subscriberToken;
-	private String moderatorToken;
-	
-	private String sessionId;
 	private int apiKey;
 	private String apiSecret;
-	
-	/* (non-Javadoc)
-	 * @see org.knetwork.webapp.service.TokboxService#getTokboxSessionId()
-	 */
-	@Override
-	public String getTokboxSessionId() {
-		if(oSession==null) {
-			try {
-			createSession();
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return oSession.getSessionId();
-	}
 	
 	public int getApiKey() {
 		return apiKey;
@@ -54,36 +36,34 @@ public class TokboxServiceImpl implements TokboxService {
 	 * @see org.knetwork.webapp.service.TokboxService#createSession()
 	 */
 	@Override
-	public void createSession() throws OpenTokException {
+	public Map<String, String> createSession() throws OpenTokException {
 		this.sdk = new OpenTokSDK(apiKey, apiSecret);
 		
 		String s = sdk.generate_token("session");
 		logger.info("Tokbox token: " + s);
-		
-		publisherToken = sdk.generate_token("session",RoleConstants.PUBLISHER);
-		subscriberToken = sdk.generate_token("session",RoleConstants.SUBSCRIBER);
-		moderatorToken = sdk.generate_token("session",RoleConstants.MODERATOR);
-	
-		logger.info("Token, publish:    " + publisherToken);
-		logger.info("Token, subscriber: " + subscriberToken);
+		String moderatorToken = sdk.generate_token("session",RoleConstants.MODERATOR);
 		logger.info("Token, moderator:  " + moderatorToken);
 	
 		//Generate a basic session
 		oSession = sdk.create_session();
 		logger.info("Creating Tokbox session: " + oSession.session_id);
-	}
-
-	public String getPublisherToken() {
-		return publisherToken;
-	}
-
-	public String getSubscriberToken() {
-		return subscriberToken;
-	}
-
-	public String getModeratorToken() {
-		return moderatorToken;
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("tokboxSessionId", oSession.session_id);
+		map.put("moderatorToken", moderatorToken);
+		
+		return map;
 	}
 	
-	
+	public Map<String, String> getUserTokens(String tokboxSessionId) throws OpenTokException {
+		this.sdk = new OpenTokSDK(apiKey, apiSecret);
+		String publisherToken = sdk.generate_token(tokboxSessionId,RoleConstants.PUBLISHER);
+		String subscriberToken = sdk.generate_token(tokboxSessionId,RoleConstants.SUBSCRIBER);
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("publisherToken", publisherToken);
+		map.put("subscriberToken", subscriberToken);
+		
+		return map;
+	}
 }

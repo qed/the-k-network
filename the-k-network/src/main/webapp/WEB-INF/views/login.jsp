@@ -13,7 +13,7 @@
 			Give help. Get help. On Demand<br />
 		</p>
         <p>
-			<a class="btn btn-primary btn-large" href="">Start a Session</a>
+			<a class="btn btn-primary btn-large" href="/learn">Start a Session</a>
 			<a class="btn btn-primary btn-large" href="${requestTokenUrl}">Join our Network!</a>
 		</p>
 

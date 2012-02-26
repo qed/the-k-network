@@ -31,8 +31,6 @@ public class SessionMapUtil {
 	}
 	
 	public static boolean tokboxSessionExists(String learningSessionId) {
-		if(!isLearningSessionMapped(learningSessionId)) return false;
-		
 		return getTokboxSessionId(learningSessionId) != null;
 	}
 	
@@ -41,11 +39,7 @@ public class SessionMapUtil {
 			addLearningSessionToMap(learningSessionId);
 			return null;
 		} else {
-			if(tokboxSessionExists(learningSessionId)) {
-				return sessionMap.get(learningSessionId).get(TOKBOX);
-			} else {
-				return null;
-			}
+			return sessionMap.get(learningSessionId).get(TOKBOX);
 		}
 	}
 	

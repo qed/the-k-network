@@ -1,6 +1,7 @@
 package org.knetwork.webapp.controller;
 
 import java.net.MalformedURLException;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -10,11 +11,10 @@ import org.knetwork.webapp.service.TokboxService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.opentok.exception.OpenTokException;
 
 @Controller
-// @Scope(value="session")
-@RequestMapping(value="/tokbox/view")
 public class TokboxController {
 
 	private final TokboxService tokboxService;
@@ -25,13 +25,30 @@ public class TokboxController {
 		this.tokboxService = tokboxService;
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping("tokbox/join")
 	public String doGet(final HttpSession session, final HttpServletRequest request, final Model model) throws MalformedURLException {
 		if(tokboxService==null) throw new RuntimeException("Tokbox service was null!");
-		model.addAttribute("tokboxSessionId", tokboxService.getTokboxSessionId());
-		model.addAttribute("apiKey", tokboxService.getApiKey());
-		model.addAttribute("publisherToken", tokboxService.getPublisherToken());
-		model.addAttribute("subscriberToken", tokboxService.getSubscriberToken());
+		String learningSessionId = (String)session.getAttribute("learningSessionId");
+		System.out.println("Tokbox pages loaded with learning session: " + learningSessionId);
+		if(learningSessionId==null) {
+			throw new RuntimeException("You can't run tokbox without a learning session!");
+		}
+		
+		String tokboxSessionId = (String)session.getAttribute("tokboxSessionId");
+		if(tokboxSessionId==null) {
+			throw new RuntimeException("You can't run tokbox without a tokbox session!");
+		}
+		System.out.println("Tokbox pages loaded with tokbox session: " + tokboxSessionId);
+		
+		try {	
+			Map<String, String> tokboxMap = tokboxService.getUserTokens(tokboxSessionId);
+			model.addAttribute("tokboxSessionId", tokboxSessionId);
+			model.addAttribute("apiKey", tokboxService.getApiKey());
+			model.addAttribute("publisherToken", tokboxMap.get("publisherToken"));
+			model.addAttribute("subscriberToken", tokboxMap.get("subscriberToken"));
+		} catch (OpenTokException e) {
+			e.printStackTrace();
+		}
 		return "tokbox/view";
 	}
 	
