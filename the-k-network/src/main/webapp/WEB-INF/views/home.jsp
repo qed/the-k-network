@@ -5,7 +5,15 @@
 			<h1>${user.nickname}</h1>
 		</div>
 		<div class="span12">
-			<a class="btn btn-primary btn-large" href="/learn">Start a Session</a>
+			<h3>Existing Sessions</h3>
+			<ul>
+				<c:forEach items="${learningSessions}" var="lSession">
+				<li><a href="/learn/join?learningSessionId=${lSession}">${lSession}</a></li>
+				</c:forEach>
+			</ul>
+		</div>
+		<div class="span12">
+			<a class="btn btn-primary btn-large" href="/learn/createMeeting">Start a Session</a>
 		</div>
 		<div class="column span6">
 			<h2>Proficient</h2>

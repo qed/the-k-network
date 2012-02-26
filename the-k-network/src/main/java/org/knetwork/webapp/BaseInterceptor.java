@@ -12,6 +12,7 @@ import org.knetwork.webapp.oauth.KhanOAuthService;
 import org.knetwork.webapp.service.TokboxService;
 import org.knetwork.webapp.util.ApiHelper;
 import org.knetwork.webapp.util.KhanAcademyApi;
+import org.knetwork.webapp.util.SessionMapUtil;
 import org.scribe.model.OAuthConstants;
 import org.scribe.model.Token;
 import org.slf4j.Logger;
@@ -64,6 +65,8 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
 	        if(modelAndView!=null) modelAndView.addObject("exercises", new ExerciseContainer(apiHelper.getExercises(), apiHelper.getBadges()));
 	        if(modelAndView!=null) modelAndView.addObject("user", apiHelper.getUser());
         }
+        
+        if(modelAndView!=null) modelAndView.addObject("learningSessions",SessionMapUtil.getLearningSessions());
 	}
 	
 	@Override

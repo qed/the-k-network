@@ -51,7 +51,12 @@ public class LearningController {
     
     @RequestMapping("learn/join")
     public String displayLearningSession(final HttpSession session, final HttpServletRequest request, final Model model) throws MalformedURLException {
+    	String newLearningSessionId = (String)request.getParameter("learningSessionId");
     	String learningSessionId = (String)session.getAttribute("learningSessionId");
+    	if(!newLearningSessionId.equals(learningSessionId)) {
+    		session.setAttribute("learningSessionId", newLearningSessionId);
+    		learningSessionId = newLearningSessionId;
+    	}
     	System.out.println("Loading pages with learning session: " + learningSessionId);
     	model.addAttribute("learningSessionId", learningSessionId);
         return "learning/view";
