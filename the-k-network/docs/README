@@ -1,0 +1,7 @@
+In order for this project to build/deploy properly, you need to install
+the opentok library which is not available in any public maven repository
+to your local maven repository.
+
+Navigate to the root directory of the project and run the following command:
+
+mvn install:install-file -Dfile=lib/opentok-api.jar -DgroupId=com.opentok -DartifactId=opentok-api -Dversion=1.0 -Dpackaging=jar
