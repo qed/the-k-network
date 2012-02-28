@@ -10,10 +10,7 @@
 	// set up the globals used by the next included js file
 		var apiKey = ${apiKey};
 		var sessionId = '${tokboxSessionId}';
-		var token = 'devtoken'; // Should not be hard-coded.
-								// Add to the page using the OpenTok server-side libraries.
-								
-		alert("Tokbox session id: " + sessionId);
+		var token = 'devtoken';
 </script>
 
 <script type="text/javascript" src="/resources/js/knetwork-tokbox.js"></script>

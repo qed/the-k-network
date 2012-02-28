@@ -62,5 +62,12 @@ public class LearningController {
         return "learning/view";
     }
     
+    @RequestMapping("learn/whiteboard")
+    public String showWhiteboard(final HttpSession session, final HttpServletRequest request, final Model model) throws MalformedURLException {
+    	String learningSessionId = (String)session.getAttribute("learningSessionId");
+    	model.addAttribute("learningSessionId", learningSessionId);
+        return "learning/whiteboard";
+    }
+    
     
 }
