@@ -34,12 +34,15 @@
 		<div class="container">
 			<a class="brand" href="#"><fmt:message key="site.title"/></a>
 			<ul class="nav">
+				<li><a href="/">Home</a></li>
 				<li><a href="#mission">Our Mission</a></li>
 				<li><a href="#team">Our Team</a></li>
 				<li><a href="#contact">Contact Us</a></li>
+				<%--
 				<c:if test="${loggedIn}">
 					<li><a href="/logout">Logout</a></li>
 				</c:if>
+				 --%>
 			</ul>
 		</div>
 	</div>

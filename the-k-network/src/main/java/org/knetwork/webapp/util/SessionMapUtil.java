@@ -10,6 +10,7 @@ public class SessionMapUtil {
 
 	private static final String WHITEBOARD = "WHITEBOARD";
 	private static final String TOKBOX = "TOKBOX";
+	private static final String SESSION_TITLE = "SESSION_TITLE";
 
 	protected static Map<String, Map<String, String>> sessionMap = new Hashtable<String, Map<String, String>>();
 
@@ -27,7 +28,24 @@ public class SessionMapUtil {
 			sessionMap.put(learningSessionId, apiSessionMap);
 		}
 	}
-
+	
+	public static void setSessionTitle(String learningSessionId, String sessionTitle) {
+		if (isLearningSessionMapped(learningSessionId)) {
+			Map<String, String> apiSessionMap = sessionMap.get(learningSessionId);
+			apiSessionMap.put(SESSION_TITLE, sessionTitle);
+			sessionMap.put(learningSessionId, apiSessionMap);
+		}
+	}
+	
+	public static String getSessionTitle(String learningSessionId) {
+		if (isLearningSessionMapped(learningSessionId)) {
+			Map<String, String> apiSessionMap = sessionMap.get(learningSessionId);
+			return apiSessionMap.get(SESSION_TITLE);
+		} else {
+			return "";
+		}
+	}
+	
 	private static boolean isLearningSessionMapped(String learningSessionId) {
 		return sessionMap.get(learningSessionId) != null;
 	}
@@ -53,10 +71,11 @@ public class SessionMapUtil {
 
 	}
 
-	public static List<String> getLearningSessions() {
-		List<String> sessions = new ArrayList<String>();
+	public static List<LearningSession> getLearningSessions() {
+		List<LearningSession> sessions = new ArrayList<LearningSession>();
 		for (String key : sessionMap.keySet()) {
-			sessions.add(key);
+			LearningSession ls = new LearningSession(key, getSessionTitle(key));
+			sessions.add(ls);
 		}
 		return sessions;
 	}

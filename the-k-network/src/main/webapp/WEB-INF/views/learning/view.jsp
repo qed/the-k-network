@@ -1,6 +1,11 @@
 <jsp:include page="../shared/header.jsp" />
 <div class="container">
 <div class="row">
+	<div class="column span12">
+		<h2>${sessionTitle}</h2>
+	</div>
+</div>
+<div class="row">
 	<div class="column span6">
 		<jsp:include page="../user-feedback/view.jsp" />
 	</div>

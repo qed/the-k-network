@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.knetwork.webapp.entity.User;
 import org.knetwork.webapp.model.ExerciseContainer;
 import org.knetwork.webapp.oauth.KhanOAuthService;
 import org.knetwork.webapp.service.TokboxService;
@@ -53,6 +54,8 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		
 		final Token accessToken = (Token) session.getAttribute("accessToken");
+		String nickname = (String)request.getParameter("nickName");
+		
 		if(modelAndView!=null) modelAndView.addObject("loggedIn", accessToken != null);
         if (accessToken == null) {
             String authority = new URL(request.getRequestURL().toString()).getAuthority();
@@ -62,11 +65,16 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
             if(modelAndView!=null) modelAndView.addObject("requestTokenUrl", requestTokenUrl);
         } else {
 	        final ApiHelper apiHelper = new ApiHelper(accessToken, oauthService, api);
+	        User user = apiHelper.getUser();
 	        if(modelAndView!=null) modelAndView.addObject("exercises", new ExerciseContainer(apiHelper.getExercises(), apiHelper.getBadges()));
-	        if(modelAndView!=null) modelAndView.addObject("user", apiHelper.getUser());
+	        if(modelAndView!=null) modelAndView.addObject("user", user);
+	        nickname = user.getNickname();
         }
         
-        if(modelAndView!=null) modelAndView.addObject("learningSessions",SessionMapUtil.getLearningSessions());
+        if(modelAndView!=null) {
+            if(nickname!=null) modelAndView.addObject("nickName",nickname);
+        	modelAndView.addObject("learningSessions",SessionMapUtil.getLearningSessions());
+        }
 	}
 	
 	@Override

@@ -31,11 +31,13 @@ public class LearningController {
     	String learningSessionId = SessionMapUtil.generateLearningSessionId();
     	model.addAttribute("learningSessionId", learningSessionId);
     	session.setAttribute("learningSessionId",learningSessionId);
+    	String sessionTitle = (String)request.getParameter("sessionTitle");
     	try {
 			Map<String, String> tokboxMap = tokboxService.createSession();
 			String tokboxSessionId = tokboxMap.get("tokboxSessionId");
 			String moderatorToken  = tokboxMap.get("moderatorToken");
 			SessionMapUtil.addTokboxSessionId(learningSessionId, tokboxSessionId);
+			SessionMapUtil.setSessionTitle(learningSessionId, sessionTitle);
 			
 			System.out.println("Adding tokbox session id:" + tokboxSessionId + " to learning session:" + learningSessionId);
 			
@@ -58,6 +60,7 @@ public class LearningController {
     		learningSessionId = newLearningSessionId;
     	}
     	System.out.println("Loading pages with learning session: " + learningSessionId);
+    	model.addAttribute("sessionTitle", SessionMapUtil.getSessionTitle(learningSessionId));
     	model.addAttribute("learningSessionId", learningSessionId);
         return "learning/view";
     }
@@ -66,6 +69,7 @@ public class LearningController {
     public String showWhiteboard(final HttpSession session, final HttpServletRequest request, final Model model) throws MalformedURLException {
     	String learningSessionId = (String)session.getAttribute("learningSessionId");
     	model.addAttribute("learningSessionId", learningSessionId);
+    	model.addAttribute("sessionTitle", SessionMapUtil.getSessionTitle(learningSessionId));
         return "learning/whiteboard";
     }
     
