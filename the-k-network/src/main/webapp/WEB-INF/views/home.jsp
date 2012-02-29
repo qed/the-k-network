@@ -13,6 +13,10 @@
 			<a class="btn btn-primary btn-large" href="${requestTokenUrl}">Join our Network!</a>
 		</p>
 
+
+		<p>
+			${sessionScope.commandOutput}
+		</p>
       </div>
 
 	<div class="row">
