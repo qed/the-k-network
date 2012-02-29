@@ -51,6 +51,12 @@ public class LearningController {
         return String.format("redirect:/learn/join?learningSessionId=%s", learningSessionId);
     }
     
+    @RequestMapping("learn/setNickName")
+    public String setNickName(final HttpSession session, final HttpServletRequest request, final Model model) throws MalformedURLException {
+    	session.setAttribute("nickName", request.getParameter("nickName"));
+        return String.format("redirect:/");
+    }
+    
     @RequestMapping("learn/join")
     public String displayLearningSession(final HttpSession session, final HttpServletRequest request, final Model model) throws MalformedURLException {
     	String newLearningSessionId = (String)request.getParameter("learningSessionId");
@@ -62,6 +68,7 @@ public class LearningController {
     	System.out.println("Loading pages with learning session: " + learningSessionId);
     	model.addAttribute("sessionTitle", SessionMapUtil.getSessionTitle(learningSessionId));
     	model.addAttribute("learningSessionId", learningSessionId);
+    	model.addAttribute("meetingExists",true);
         return "learning/view";
     }
     

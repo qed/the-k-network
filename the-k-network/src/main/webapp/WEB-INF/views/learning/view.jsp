@@ -1,26 +1,21 @@
 <jsp:include page="../shared/header.jsp" />
-<div class="container">
-<div class="row">
-	<div class="column span12">
-		<h2>${sessionTitle}</h2>
+<div class="container-fluid">
+	<div class="row">
+		
+		<div class="column span10" style="padding-right:5px">
+			<iframe name="inlineframe" src="http://theknetwork.org:9001/p/${learningSessionId}?userName=${sessionScope.nickName}" 
+					frameborder="0" scrolling="no" 
+					width="800" height="600"
+					marginwidth="3" marginheight="0" ></iframe>
+		</div>
+		
+		<div class="column span4 well">
+			<h3>Welcome, ${sessionScope.nickName}</h3><br/>
+			<jsp:include page="../tokbox/include.jsp"/>
+			<br/><br/>
+			<jsp:include page="../user-feedback/view.jsp" />
+		</div>
+		
 	</div>
-</div>
-<div class="row">
-	<div class="column span6">
-		<jsp:include page="../user-feedback/view.jsp" />
-	</div>
-	<div class="column span6">
-		<jsp:include page="../tokbox/include.jsp"/>
-	</div>
-</div>
-
-<div class="row">
-	
-	<div class="column span12" style="margin:10px">
-		<iframe name="inlineframe" src="/learn/whiteboard" 
-			frameborder="0" scrolling="auto" width="800" 
-			height="600" marginwidth="5" marginheight="5" ></iframe>
-	</div>
-</div>
 </div>
 <jsp:include page="../shared/footer.jsp" />

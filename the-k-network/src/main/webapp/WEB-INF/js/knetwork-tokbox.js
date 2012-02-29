@@ -31,7 +31,7 @@ var session;
 		//  OPENTOK EVENT HANDLERS
 		//--------------------------------------
 		function sessionConnectedHandler(event) {
-			document.getElementById("call-status").innerHTML = "Listening";
+			document.getElementById("call-status").innerHTML = "<div class='alert alert-info'>Listening</a>";
 
 			// Display all streams on screen
 			for (var i = 0; i < event.streams.length; i++) {
@@ -39,14 +39,15 @@ var session;
 			}
 
 			// Now possible to join a session
-			show("publishLink");
+			// show("publishLink");
+			startPublishing();
 		}
 
 		function sessionDisconnectedHandler (event) {
 			// We lost connection to the server
-			document.getElementById("call-status").innerHTML = "Disconnected";
-			hide("unpublishLink");
-			hide("publishLink");
+			document.getElementById("call-status").innerHTML = "<div class='alert alert-error'>Audio Disconnected</a>";
+			//hide("unpublishLink");
+			//hide("publishLink");
 			hide("push-to-talk");
 		}
 
@@ -58,7 +59,7 @@ var session;
 					subscribeToStream(event.streams[i]);
 				} else {
 					// Our publisher just started streaming
-					show("unpublishLink");
+					//show("unpublishLink");
 				}
 			}
 		}
@@ -68,7 +69,7 @@ var session;
 			for (var i = 0; i < event.streams.length; i++) {
 				if (event.streams[i].connection.connectionId == session.connection.connectionId) {
 					// Our publisher just stopped streaming
-					document.getElementById("call-status").innerHTML = "Listening";
+					document.getElementById("call-status").innerHTML = "<div class='alert alert-info'>Listening</a>";
 					show("publishLink");
 					hide("unpublishLink");
 				}
@@ -88,11 +89,13 @@ var session;
 			switch(publisher.getEchoCancellationMode()) {
 				case "fullDuplex":
 					setPushToTalk(false);
-					document.getElementById("call-status").innerHTML = "Active";
+					document.getElementById("call-status").innerHTML = "<div class='alert alert-info'>Audio Active</div>";
+					$("#myCamera").addClass("small");
 					break;
 				case "none":
-					document.getElementById("call-status").innerHTML = "Active";
+					document.getElementById("call-status").innerHTML = "<div class='alert alert-info'>Audio Active</div>";
 					setPushToTalk(true);
+					$("#myCamera").addClass("small");
 					break;
 			}
 		}
@@ -124,8 +127,7 @@ var session;
 			publisher = session.publish(stubSpan.id, publishProps);
 			publisher.addEventListener("echoCancellationModeChanged", echoCancellationModeChangedHandler);
 
-			document.getElementById("call-status").innerHTML = "Joining...";
-			hide("publishLink");
+			document.getElementById("call-status").innerHTML = "<div class='alert alert-success'>Joining audio...</div>";
 		}
 
 		// Called when user wants to stop participating in the session
@@ -142,8 +144,8 @@ var session;
 				publisher = null;
 			}
 
-			document.getElementById("call-status").innerHTML = "Leaving...";
-			hide("unpublishLink");
+			document.getElementById("call-status").innerHTML = "<div class='alert alert-success'>Leaving audio...</div>";
+			//hide("unpublishLink");
 		}
 
 		// Called when a user pushes-to-talk

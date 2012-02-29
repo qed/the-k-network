@@ -1,14 +1,19 @@
 <%@ include file="../../standard-include.jspf" %>
 <script type="text/javascript" src="/resources/js/lib/jquery-1.7.1.js"></script>
-<form id="whiteboardForm" method="post" action="/whiteboard-showcase-0.1/api/create">
-	<input type="hidden" name="sessionId" id="sessionId"/>
-	<input type="hidden" name="title" id="title"/>
-	<input type="hidden" name="username" id="username"/>
-</form>
+
+<form id="whiteboardForm" action="" method="post"></form>
 
 <script type="text/javascript">
-	$("#sessionId").val('${learningSessionId}');
-	$("#title").val("A Title");
-	$("#username").val("Johnny");
-	$("#whiteboardForm").submit();
+	var urlCreate = "/whiteboard-showcase/api/create";
+	var urlJoin = "/whiteboard-showcase/api/join";
+	var urlFinal = "/whiteboard-showcase/whiteboard/workplace";
+	$.ajax({
+	  url: urlCreate+"?sessionId=${learningSessionId}&title=${sessionTitle}&username=${sessionScope.nickName}",
+	  success: function(data) {
+		  alert(data);
+		  $("#whiteboardForm").attr('action', urlFinal + data);
+		  $("#whiteboardForm").submit();
+	  }
+	});
 </script>
+

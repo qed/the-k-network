@@ -1,8 +1,8 @@
 <%@ include file="../../standard-include.jspf" %>
 <style type="text/css">
   .small > * {
-    width: 80px;
-    height: 40px;
+    width: 180px;
+    height: 80px;
   }
 </style>
 <div id="tokboxContainer">
@@ -18,17 +18,12 @@
 <div id="subscribers"></div>
 </div>	
 
-<div class="container">
-	<div class="smalltype">Status:  <span id="call-status">Connecting</span></div>
-	<div id="links" style="width:300px">
-	    <a href="#" id ="publishLink" onClick="javascript:startPublishing()">Connect</a><br/>
-	    <a href="#" id ="unpublishLink" onClick="javascript:stopPublishing()">Leave</a><br/>
-	    <a href="#" id ="push-to-talk" onClick="startTalking()">Unmute</a>
-	</div>
+<div class="smalltype"><span id="call-status"><div class='alert alert-success'>Connecting to Audio, please wait...</div></span></div>
+
+<div id="myCamera" class="publisherContainer" class="small">
+	<span id="filler"></span>
 </div>
 
-<div class="container">
-	<div id="myCamera" class="publisherContainer">
-		<span id="filler"></span>
-	</div>
+<div id="links" style="width:200px">
+    <a href="#" class='.btn-success' id="push-to-talk">Unmute</a>
 </div>

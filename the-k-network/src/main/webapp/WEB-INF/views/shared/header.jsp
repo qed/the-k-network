@@ -5,6 +5,8 @@
 <!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
 <!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
+	<link REL="SHORTCUT ICON" HREF="/resources/img/light-bulb-icon.png">
+
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title><fmt:message key="site.title"/></title>

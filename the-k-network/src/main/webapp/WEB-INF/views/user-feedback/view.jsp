@@ -1,9 +1,6 @@
 <%@ include file="../../standard-include.jspf" %>
 
-<div class="container">
-	<h3>Rate this Session</h3>
-				
-	<div id="message">&nbsp;</div>
+	<b>Rate this Session</b>
 	<div id="star"></div>
 	
 	<script type="text/javascript">
@@ -12,8 +9,12 @@
 		    $.ajax({
 		    	url:"/user-feedback/rate?score="+score
 		    });
-		    $("#message").text("You just rated us " + score);
+		    $("#message").html("<div class='alert alert-info'>You just rated us " + score + "</div>");
 		  }
 		});
 	</script>
-</div>
+	<div id="message">
+		<div class="alert alert-error">
+			Don't forget to rate the learning session!
+		</div>
+	</div>

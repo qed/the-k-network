@@ -55,6 +55,8 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
 		
 		final Token accessToken = (Token) session.getAttribute("accessToken");
 		String nickname = (String)request.getParameter("nickName");
+		if(nickname==null) nickname = (String)session.getAttribute("nickName");
+		System.out.println("Nickname: " + nickname);
 		
 		if(modelAndView!=null) modelAndView.addObject("loggedIn", accessToken != null);
         if (accessToken == null) {
@@ -72,7 +74,12 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
         }
         
         if(modelAndView!=null) {
-            if(nickname!=null) modelAndView.addObject("nickName",nickname);
+            if(nickname!=null && nickname.length() > 0) {
+            	session.setAttribute("nickName",nickname);
+            	session.setAttribute("hasNickName", true);
+            } else {
+            	session.setAttribute("hasNickName", false);
+            }
         	modelAndView.addObject("learningSessions",SessionMapUtil.getLearningSessions());
         }
 	}

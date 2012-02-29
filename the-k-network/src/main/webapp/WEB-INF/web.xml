@@ -5,14 +5,6 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
 	
-	
-	<resource-ref>
-      <description>Dev DB Connection</description>
-      <res-ref-name>jdbc/qedDbDev</res-ref-name>
-      <res-type>javax.sql.DataSource</res-type>
-      <res-auth>Container</res-auth>
-  	</resource-ref>
-	
 	<servlet>
 		<servlet-name>appServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -30,7 +22,7 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
-		<!-- Applies UTF-8 character encoding by default -->
+		<!-- Applies UTF-8 character encoding by default --> 
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
