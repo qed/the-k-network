@@ -12,11 +12,6 @@
         <p>
 			<a class="btn btn-primary btn-large" href="${requestTokenUrl}">Join our Network!</a>
 		</p>
-
-
-		<p>
-			${sessionScope.commandOutput}
-		</p>
       </div>
 
 	<%@ include file="includes/users_and_sessions.jsp" %>
