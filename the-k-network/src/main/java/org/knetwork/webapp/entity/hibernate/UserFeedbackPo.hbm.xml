@@ -16,5 +16,8 @@
         <property name="ratingDate" type="java.util.Date">
         	<column name="rating_date"/>
         </property>
+        <property name="learningSessionId" type="string">
+        	<column name="learning_session_id"/>
+        </property>
     </class>
 </hibernate-mapping>

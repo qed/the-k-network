@@ -1,6 +1,8 @@
 package org.knetwork.webapp.service;
 
 import org.knetwork.webapp.entity.hibernate.UserFeedbackPo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +21,24 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(propagation = Propagation.REQUIRED)
 public class UserFeedbackServiceImpl extends GenericServiceImpl implements UserFeedbackService {
 
-	public void saveUserFeedback(UserFeedbackPo userFeedback) {
-		getDao().save(userFeedback);
+	private final Logger logger = LoggerFactory.getLogger(getClass());
+	
+	public boolean saveUserFeedback(UserFeedbackPo userFeedback) {
+		UserFeedbackPo examplePo = new UserFeedbackPo();
+		examplePo.setUserId(userFeedback.getUserId());
+		examplePo.setLearningSessionId(userFeedback.getLearningSessionId());
+		int countOf = getDao().getRecordCountForExample(examplePo);
+		
+		if(countOf == 1) {
+			examplePo.setRating(userFeedback.getRating());
+			getDao().save(examplePo);
+			logger.info("Found existing rating, updating.");
+			return true;
+		} else {
+			getDao().save(userFeedback);
+			logger.info("Created new rating.");
+			return false;
+		}
 	}
 	
 }

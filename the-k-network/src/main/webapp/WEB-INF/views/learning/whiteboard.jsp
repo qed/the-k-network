@@ -10,7 +10,6 @@
 	$.ajax({
 	  url: urlCreate+"?sessionId=${learningSessionId}&title=${sessionTitle}&username=${sessionScope.nickName}",
 	  success: function(data) {
-		  alert(data);
 		  $("#whiteboardForm").attr('action', urlFinal + data);
 		  $("#whiteboardForm").submit();
 	  }

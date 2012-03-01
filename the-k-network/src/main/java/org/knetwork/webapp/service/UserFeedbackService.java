@@ -7,6 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(propagation = Propagation.REQUIRED)
 public interface UserFeedbackService extends GenericService {
 
-	public void saveUserFeedback(UserFeedbackPo userFeedback);
+	/**
+	 * Returns true if a rating already existed for this session
+	 * and user.
+	 * @param userFeedback
+	 * @return
+	 */
+	public boolean saveUserFeedback(UserFeedbackPo userFeedback);
 	
 }

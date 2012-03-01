@@ -376,7 +376,7 @@ public class GenericDaoImpl implements GenericDao {
 	 */
 	@Override
 	public void save(Object po) {
-		getSession().save(po);
+		getSession().saveOrUpdate(po);
 	}
 
 	/* (non-Javadoc)

