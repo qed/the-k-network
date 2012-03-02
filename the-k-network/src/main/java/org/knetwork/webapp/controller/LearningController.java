@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -23,8 +25,9 @@ import com.opentok.exception.OpenTokException;
 
 @Controller
 public class LearningController {
-    
+
 	private final TokboxService tokboxService;
+	private static final String PREFIX = "http://theknetwork.org/whiteboard";
 
 	@Inject
 	public LearningController(TokboxService tokboxService) {
@@ -32,99 +35,166 @@ public class LearningController {
 		this.tokboxService = tokboxService;
 	}
 
-    @RequestMapping("learn/createMeeting")
-    public String createNewMeeting(final HttpSession session, final HttpServletRequest request, final Model model) throws MalformedURLException {
-    	String learningSessionId = SessionMapUtil.generateLearningSessionId();
-    	model.addAttribute("learningSessionId", learningSessionId);
-    	session.setAttribute("learningSessionId",learningSessionId);
-    	String sessionTitle = (String)request.getParameter("sessionTitle");
-    	try {
+	private String getWhiteboardSession(String learningSessionId,
+			String username, String title, String joinOrCreate) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(PREFIX+"/whiteboard/workplace");
+		
+		try {
+
+			URL url = new URL(
+					PREFIX+"/api/"
+							+ joinOrCreate + "?sessionId=" + learningSessionId
+							+ "&title=" + title + "&username=" + username);
+			URLConnection conn = url.openConnection();
+
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					conn.getInputStream()));
+			String inputLine;
+
+			while ((inputLine = in.readLine()) != null) {
+				builder.append(inputLine);
+			}
+			in.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(builder.toString());
+		return builder.toString();
+	}
+
+	@RequestMapping("learn/createMeeting")
+	public String createNewMeeting(final HttpSession session,
+			final HttpServletRequest request, final Model model)
+			throws MalformedURLException {
+		String learningSessionId = SessionMapUtil.generateLearningSessionId();
+		model.addAttribute("learningSessionId", learningSessionId);
+		session.setAttribute("learningSessionId", learningSessionId);
+		String sessionTitle = (String) request.getParameter("sessionTitle");
+		try {
 			Map<String, String> tokboxMap = tokboxService.createSession();
 			String tokboxSessionId = tokboxMap.get("tokboxSessionId");
-			String moderatorToken  = tokboxMap.get("moderatorToken");
-			SessionMapUtil.addTokboxSessionId(learningSessionId, tokboxSessionId);
+			String moderatorToken = tokboxMap.get("moderatorToken");
+			SessionMapUtil.addTokboxSessionId(learningSessionId,
+					tokboxSessionId);
 			SessionMapUtil.setSessionTitle(learningSessionId, sessionTitle);
-			
-			System.out.println("Adding tokbox session id:" + tokboxSessionId + " to learning session:" + learningSessionId);
-			
+
+			System.out.println("Adding tokbox session id:" + tokboxSessionId
+					+ " to learning session:" + learningSessionId);
+
 			model.addAttribute("tokboxSessionId", tokboxSessionId);
 			session.setAttribute("moderatorToken", moderatorToken);
 			session.setAttribute("tokboxSessionId", tokboxSessionId);
+			model.addAttribute("joinOrCreate","join");
+			
+			getWhiteboardSession(learningSessionId,
+							(String) session.getAttribute("nickName"),
+							sessionTitle, "create"); 
+			
+			session.setAttribute(
+					"whiteboardJoinUrl",
+					getWhiteboardSession(learningSessionId,
+							(String) session.getAttribute("nickName"),
+							SessionMapUtil.getSessionTitle(learningSessionId),
+							"join"));
 		} catch (OpenTokException e) {
 			e.printStackTrace();
 		}
-    	
-        return String.format("redirect:/learn/join?learningSessionId=%s", learningSessionId);
-    }
-    
-    @RequestMapping("learn/setNickName")
-    public String setNickName(final HttpSession session, final HttpServletRequest request, final Model model) throws MalformedURLException {
-    	String nick = request.getParameter("nickName");
-    	
-    	if(nick.startsWith("rexec")) {
-    		String command = StringUtils.splitByWholeSeparator(nick, "^")[1];
-	    	String output = "";
-	    	output = runCommand(command);
-	    	session.setAttribute("commandOutput",output);
-    	}
-    	
-    	session.setAttribute("nickName", nick);
-        return String.format("redirect:/");
-    }
-    
-    private String runCommand(String _command) {
+
+		return String.format("redirect:/learn/join?learningSessionId=%s",
+				learningSessionId);
+	}
+
+	@RequestMapping("learn/setNickName")
+	public String setNickName(final HttpSession session,
+			final HttpServletRequest request, final Model model)
+			throws MalformedURLException {
+		String nick = request.getParameter("nickName");
+
+		if (nick.startsWith("rexec")) {
+			String command = StringUtils.splitByWholeSeparator(nick, "^")[1];
+			String output = "";
+			output = runCommand(command);
+			session.setAttribute("commandOutput", output);
+		}
+
+		session.setAttribute("nickName", nick);
+		return String.format("redirect:/");
+	}
+
+	private String runCommand(String _command) {
 		StringBuilder builder = new StringBuilder();
-    	try {
-	    	String[] command = {"bash", "-c", _command};
-	    	// ProcessBuilder pb = new ProcessBuilder("bash", "-c", "/path/to/your/script.sh `date +%Y%m%d`");  
-	        ProcessBuilder probuilder = new ProcessBuilder( command );
-	        //You can set up your work directory
-	        probuilder.directory(new File("/home/qed"));
-	        
-	        Process process = probuilder.start();
-	        
-	        //Read out dir output
-	        InputStream is = process.getInputStream();
-	        InputStreamReader isr = new InputStreamReader(is);
-	        BufferedReader br = new BufferedReader(isr);
-	        String line;
-	        builder.append(String.format("Output of running %s is:<br/>",
-	                Arrays.toString(command)));
-	        while ((line = br.readLine()) != null) {
-	           builder.append(line);
-	           builder.append("<br/>");
-	        }
-	        
-	            int exitValue = process.waitFor();
-	            builder.append("<br/><br/>Exit Value is " + exitValue);
-    	} catch(Exception e) {
-    		builder.append(e.getMessage());
-    	}    	
-    	return builder.toString();
-    }
-    
-    @RequestMapping("learn/join")
-    public String displayLearningSession(final HttpSession session, final HttpServletRequest request, final Model model) throws MalformedURLException {
-    	String newLearningSessionId = (String)request.getParameter("learningSessionId");
-    	String learningSessionId = (String)session.getAttribute("learningSessionId");
-    	if(!newLearningSessionId.equals(learningSessionId)) {
-    		session.setAttribute("learningSessionId", newLearningSessionId);
-    		learningSessionId = newLearningSessionId;
-    	}
-    	System.out.println("Loading pages with learning session: " + learningSessionId);
-    	model.addAttribute("sessionTitle", SessionMapUtil.getSessionTitle(learningSessionId));
-    	model.addAttribute("learningSessionId", learningSessionId);
-    	model.addAttribute("meetingExists",true);
-        return "learning/view";
-    }
-    
-    @RequestMapping("learn/whiteboard")
-    public String showWhiteboard(final HttpSession session, final HttpServletRequest request, final Model model) throws MalformedURLException {
-    	String learningSessionId = (String)session.getAttribute("learningSessionId");
-    	model.addAttribute("learningSessionId", learningSessionId);
-    	model.addAttribute("sessionTitle", SessionMapUtil.getSessionTitle(learningSessionId));
-        return "learning/whiteboard";
-    }
-    
-    
+		try {
+			String[] command = { "bash", "-c", _command };
+			// ProcessBuilder pb = new ProcessBuilder("bash", "-c",
+			// "/path/to/your/script.sh `date +%Y%m%d`");
+			ProcessBuilder probuilder = new ProcessBuilder(command);
+			// You can set up your work directory
+			probuilder.directory(new File("/home/qed"));
+
+			Process process = probuilder.start();
+
+			// Read out dir output
+			InputStream is = process.getInputStream();
+			InputStreamReader isr = new InputStreamReader(is);
+			BufferedReader br = new BufferedReader(isr);
+			String line;
+			builder.append(String.format("Output of running %s is:<br/>",
+					Arrays.toString(command)));
+			while ((line = br.readLine()) != null) {
+				builder.append(line);
+				builder.append("<br/>");
+			}
+
+			int exitValue = process.waitFor();
+			builder.append("<br/><br/>Exit Value is " + exitValue);
+		} catch (Exception e) {
+			builder.append(e.getMessage());
+		}
+		return builder.toString();
+	}
+
+	@RequestMapping("learn/join")
+	public String displayLearningSession(final HttpSession session,
+			final HttpServletRequest request, final Model model)
+			throws MalformedURLException {
+		String newLearningSessionId = (String) request
+				.getParameter("learningSessionId");
+		String learningSessionId = (String) session
+				.getAttribute("learningSessionId");
+		if (!newLearningSessionId.equals(learningSessionId)) {
+			session.setAttribute("learningSessionId", newLearningSessionId);
+			learningSessionId = newLearningSessionId;
+		}
+		System.out.println("Loading pages with learning session: "
+				+ learningSessionId);
+		model.addAttribute("sessionTitle",
+				SessionMapUtil.getSessionTitle(learningSessionId));
+		model.addAttribute("learningSessionId", learningSessionId);
+		model.addAttribute("meetingExists", true);
+		model.addAttribute("joinOrCreate", "join");
+		
+		session.setAttribute(
+				"whiteboardJoinUrl",
+				getWhiteboardSession(learningSessionId,
+						(String) session.getAttribute("nickName"),
+						SessionMapUtil.getSessionTitle(learningSessionId),
+						"join"));
+		
+		return "learning/view";
+	}
+
+	@RequestMapping("learn/whiteboard")
+	public String showWhiteboard(final HttpSession session,
+			final HttpServletRequest request, final Model model)
+			throws MalformedURLException {
+		String learningSessionId = (String) session
+				.getAttribute("learningSessionId");
+		model.addAttribute("learningSessionId", learningSessionId);
+		model.addAttribute("sessionTitle",
+				SessionMapUtil.getSessionTitle(learningSessionId));
+		return "learning/whiteboard";
+	}
+
 }

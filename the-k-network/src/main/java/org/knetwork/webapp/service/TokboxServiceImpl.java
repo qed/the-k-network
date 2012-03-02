@@ -63,7 +63,7 @@ public class TokboxServiceImpl implements TokboxService {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("publisherToken", publisherToken);
 		map.put("subscriberToken", subscriberToken);
-		
+		map.put("userToken",  sdk.generate_token(tokboxSessionId));		
 		return map;
 	}
 }

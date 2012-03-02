@@ -10,7 +10,7 @@
 	// set up the globals used by the next included js file
 		var apiKey = ${apiKey};
 		var sessionId = '${tokboxSessionId}';
-		var token = 'devtoken';
+		var token = '${userToken}';
 </script>
 
 <script type="text/javascript" src="/resources/js/knetwork-tokbox.js"></script>
@@ -24,6 +24,6 @@
 	<span id="filler"></span>
 </div>
 
-<div id="links" style="width:200px">
+<div id="links" style="width:200px;display:none">
     <a href="#" class='.btn-success' id="push-to-talk">Unmute</a>
 </div>

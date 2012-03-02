@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.knetwork.webapp.service.TokboxService;
+import org.knetwork.webapp.util.SessionMapUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +35,7 @@ public class TokboxController {
 			throw new RuntimeException("You can't run tokbox without a learning session!");
 		}
 		
-		String tokboxSessionId = (String)session.getAttribute("tokboxSessionId");
+		String tokboxSessionId = SessionMapUtil.getTokboxSessionId(learningSessionId);
 		if(tokboxSessionId==null) {
 			throw new RuntimeException("You can't run tokbox without a tokbox session!");
 		}
@@ -46,6 +47,7 @@ public class TokboxController {
 			model.addAttribute("apiKey", tokboxService.getApiKey());
 			model.addAttribute("publisherToken", tokboxMap.get("publisherToken"));
 			model.addAttribute("subscriberToken", tokboxMap.get("subscriberToken"));
+			model.addAttribute("userToken", tokboxMap.get("userToken"));
 		} catch (OpenTokException e) {
 			e.printStackTrace();
 		}

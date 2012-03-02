@@ -1,21 +1,16 @@
 <jsp:include page="../shared/header.jsp" />
-<div class="container-fluid">
-	<div class="row">
-		<div class="column span4 well">
-			<h3>Welcome, ${sessionScope.nickName}</h3><br/>
-			<jsp:include page="../tokbox/include.jsp"/>
-		</div>
-		<div class="column span8 well">
-			<jsp:include page="../user-feedback/view.jsp" />
-		</div>
-	</div>
-</div>
 
-<div class="container-fluid">
-	<iframe name="inlineframe" src="/learn/whiteboard" 
+<table cellpadding="5">
+	<tr>
+		<td valign="top"><b>Welcome, ${sessionScope.nickName}</b><br/>
+			<jsp:include page="../tokbox/include.jsp"/></td>
+		<td valign="top"><jsp:include page="../user-feedback/view.jsp" /></td>
+	</tr>
+</table>
+<br/><br/>
+<iframe name="inlineframe" src="/learn/whiteboard" 
 		frameborder="0" scrolling="no" 
-		width="1400" height="600"
+		width="100%" height="800"
 		marginwidth="3" marginheight="0" ></iframe>
-</div>
 
 <jsp:include page="../shared/footer.jsp" />

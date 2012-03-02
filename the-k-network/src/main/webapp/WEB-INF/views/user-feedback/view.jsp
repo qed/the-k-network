@@ -9,12 +9,9 @@
 		    $.ajax({
 		    	url:"/user-feedback/rate?score="+score
 		    });
-		    $("#message").html("<div class='alert alert-info'>You just rated us " + score + "</div>");
+		    $("#message").html("You just rated us " + score);
 		  }
 		});
 	</script>
 	<div id="message">
-		<div class="alert alert-error">
-			Don't forget to rate the learning session!
-		</div>
 	</div>
