@@ -17,18 +17,18 @@
 			<a class="btn btn-primary btn-large" href="${requestTokenUrl}">Join our Network!</a>
 		 --%>
 		 
-		<sec:authorize access="!hasRole('ROLE_USER')">
+		<c:if test="${!sessionScope.isLoggedIn}">
 			<a class="btn btn-primary btn-large" href="/login">Login</a>
-		</sec:authorize>
+		</c:if>
 		</p>
 
       </div>
 
-	  <sec:authorize access="hasRole('ROLE_USER')">
+      <c:if test="${sessionScope.isLoggedIn}">
 			<%@ include file="includes/users_and_sessions.jsp" %>
-	  </sec:authorize>
-
-	  <sec:authorize access="!hasRole('ROLE_USER')">
+      </c:if>
+	  
+	  <c:if test="${!sessionScope.isLoggedIn}">
 	      <!-- Example row of columns -->
 	      <div class="row">
 	        <div class="span4">
@@ -44,7 +44,7 @@
 	          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
 	        </div>
 	      </div>
-      </sec:authorize>
+	  </c:if>
 
 </div>
 <jsp:include page="shared/footer.jsp" />

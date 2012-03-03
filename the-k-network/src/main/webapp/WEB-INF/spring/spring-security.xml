@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <beans:beans xmlns="http://www.springframework.org/schema/security"
     xmlns:beans="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+                         http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                        http://www.springframework.org/schema/security
+                         http://www.springframework.org/schema/security/spring-security-2.0.1.xsd">
 
-    <http use-expressions="true">
-	    <intercept-url pattern="/learn/**" access="hasRole('ROLE_USER')" />
-	    <intercept-url pattern="/user-feedback/**" access="hasRole('ROLE_USER')" />
-	    <intercept-url pattern="/tokbox/**" access="hasRole('ROLE_USER')" />
-	    <intercept-url pattern="/user-features" access="hasRole('ROLE_USER')" />
-        <intercept-url pattern="/**" access="permitAll" />
-        <form-login login-page="/login" default-target-url="/"
+	<http auto-config="true">
+	    <intercept-url pattern="/learn/**" access="ROLE_USER" />
+	    <intercept-url pattern="/user-feedback/**" access="ROLE_USER" />
+	    <intercept-url pattern="/tokbox/**" access="ROLE_USER" />
+	    <intercept-url pattern="/user-features" access="ROLE_USER" />
+        <intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <form-login login-page="/login" default-target-url="/loginSuccess"
 			authentication-failure-url="/loginfailed" />
         <remember-me />
     </http>
     
-    <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="knet" password="CORRECT ME" authorities="ROLE_USER" />
-            </user-service>
-        </authentication-provider>
-    </authentication-manager>
-
+    <authentication-provider>
+    	<password-encoder hash="sha" />
+        <user-service>
+            <user name="knet" password="ea9ffb6eb4a5f167f6a29e1140b39165d47734fd" authorities="ROLE_USER" />
+        </user-service>
+    </authentication-provider>
 </beans:beans>
