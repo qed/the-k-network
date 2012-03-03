@@ -20,7 +20,7 @@ public class HomeController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String display(final HttpSession session, final HttpServletRequest request, final Model model) throws MalformedURLException {
-        return "home";
+        return "logged-in";
     }
     
     @RequestMapping("logout")
