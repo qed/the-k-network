@@ -16,26 +16,35 @@
         <%--
 			<a class="btn btn-primary btn-large" href="${requestTokenUrl}">Join our Network!</a>
 		 --%>
-		 	<a class="btn btn-primary btn-large" href="/user-features">Use Site Features</a>
+		 
+		<sec:authorize access="!hasRole('ROLE_USER')">
+			<a class="btn btn-primary btn-large" href="/login">Login</a>
+		</sec:authorize>
 		</p>
 
       </div>
 
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="span4">
-          <h2>Our Mission</h2>
-           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        </div>
-        <div class="span4">
-          <h2>Our Story</h2>
-           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-       </div>
-        <div class="span4">
-          <h2>Our Team</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        </div>
-      </div>
+	  <sec:authorize access="hasRole('ROLE_USER')">
+			<%@ include file="includes/users_and_sessions.jsp" %>
+	  </sec:authorize>
+
+	  <sec:authorize access="!hasRole('ROLE_USER')">
+	      <!-- Example row of columns -->
+	      <div class="row">
+	        <div class="span4">
+	          <h2>Our Mission</h2>
+	           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+	        </div>
+	        <div class="span4">
+	          <h2>Our Story</h2>
+	           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+	       </div>
+	        <div class="span4">
+	          <h2>Our Team</h2>
+	          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+	        </div>
+	      </div>
+      </sec:authorize>
 
 </div>
 <jsp:include page="shared/footer.jsp" />

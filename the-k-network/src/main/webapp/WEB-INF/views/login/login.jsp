@@ -2,6 +2,8 @@
 <jsp:include page="../shared/header.jsp" />
 <div class="container">
 
+	${failureMessage}
+
 	<h2>Log in, please...</h2>
 
 	<form name='f' action="<c:url value='j_spring_security_check' />"

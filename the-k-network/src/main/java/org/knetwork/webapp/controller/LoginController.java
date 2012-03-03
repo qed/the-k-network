@@ -9,15 +9,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(ModelMap model) {
-
 		return "login/login";
-
 	}
 	
-	@RequestMapping(value = "/user-features", method = RequestMethod.GET)
-	public String useSite(ModelMap model) {
-
-		return "logged-in";
-
+	@RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
+	public String loginFailed(ModelMap model) {
+		model.addAttribute("failureMessage", "<div class='alert alert-error'><h3>Incorrect user name or password.</h3></div>");
+		return "login/login";
 	}
 }
