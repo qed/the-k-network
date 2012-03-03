@@ -37,11 +37,13 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="mappingDirectoryLocations">
-			<list>
-				<value>classpath:org/knetwork/webapp/entity/hibernate</value>
-			</list>
-		</property>
+		 <property name="mappingResources">
+	      <list>
+	        <value>/org/knetwork/webapp/entity/hibernate/LearningSessionPo.hbm.xml</value>
+	        <value>/org/knetwork/webapp/entity/hibernate/UserRatingPo.hbm.xml</value>
+	        <value>/org/knetwork/webapp/entity/hibernate/UserCommentPo.hbm.xml</value>
+	      </list>
+	    </property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${jdbc.dialect}</prop>

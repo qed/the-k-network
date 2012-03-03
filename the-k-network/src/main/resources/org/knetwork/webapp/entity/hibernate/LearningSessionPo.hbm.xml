@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="org.knetwork.webapp.entity.hibernate.LearningSessionPo" table="learning_session">
+        <id name="learningSessionId" type="string">
+            <column name="learning_session_id"/>
+            <generator class="assigned" />
+        </id>
+        <property name="learningSessionTitle" type="string">
+            <column name="learning_session_title"/>
+        </property>
+        <property name="sessionDate" type="java.util.Date">
+        	<column name="session_date"/>
+        </property>
+        <set name="userRatings" table="user_rating" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="learning_session_id"/>
+            </key>
+            <one-to-many class="org.knetwork.webapp.entity.hibernate.UserRatingPo" />
+        </set>
+        <set name="userComments" table="user_comment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="learning_session_id"/>
+            </key>
+            <one-to-many class="org.knetwork.webapp.entity.hibernate.UserCommentPo" />
+        </set>
+    </class>
+    
+    <query name="findLearningSession">
+    	from LearningSessionPo l where l.learningSessionId = :learningSessionId
+    </query>
+</hibernate-mapping>

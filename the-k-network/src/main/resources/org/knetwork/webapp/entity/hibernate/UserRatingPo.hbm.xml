@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="org.knetwork.webapp.entity.hibernate.UserRatingPo" table="user_rating">
+        <id name="userRatingId" type="int">
+            <column name="user_rating_id"/>
+            <generator class="native" />
+        </id>
+        <property name="userId" type="string">
+            <column name="user_id"/>
+        </property>
+        <property name="rating" type="int">
+            <column name="rating"/>
+        </property>
+        <property name="ratingDate" type="java.util.Date">
+        	<column name="rating_date"/>
+        </property>
+        <many-to-one name="learningSession" class="org.knetwork.webapp.entity.hibernate.LearningSessionPo">
+            <column name="learning_session_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>
