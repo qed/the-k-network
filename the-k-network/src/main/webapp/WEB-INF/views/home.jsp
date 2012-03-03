@@ -18,7 +18,7 @@
 		 --%>
 		 
 		<c:if test="${!sessionScope.isLoggedIn}">
-			<a class="btn btn-primary btn-large" href="/login">Login</a>
+			<a class="btn btn-primary" href="/login">Login</a>
 		</c:if>
 		</p>
 

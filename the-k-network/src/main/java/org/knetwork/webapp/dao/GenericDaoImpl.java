@@ -24,7 +24,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
-import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.engine.SessionImplementor;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.type.ComponentType;
 import org.hibernate.type.IntegerType;
@@ -376,7 +376,7 @@ public class GenericDaoImpl implements GenericDao {
 	 */
 	@Override
 	public void save(Object po) {
-		getSession().saveOrUpdate(po);
+		getSession().save(po);
 	}
 
 	/* (non-Javadoc)

@@ -1,6 +1,10 @@
 package org.knetwork.webapp.service;
 
-import org.knetwork.webapp.entity.hibernate.UserFeedbackPo;
+import java.util.List;
+
+import org.knetwork.webapp.entity.hibernate.LearningSessionPo;
+import org.knetwork.webapp.entity.hibernate.UserCommentPo;
+import org.knetwork.webapp.entity.hibernate.UserRatingPo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -23,10 +27,25 @@ public class UserFeedbackServiceImpl extends GenericServiceImpl implements UserF
 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
-	public boolean saveUserFeedback(UserFeedbackPo userFeedback) {
-		UserFeedbackPo examplePo = new UserFeedbackPo();
+	public LearningSessionPo getLearningSession(String learningSessionId) {
+		List<LearningSessionPo> results = getDao().findByNamedQuery("findLearningSession", new String[]{"learningSessionId"}, new Object[]{learningSessionId});
+		if(results!=null) {
+			return results.get(0);
+		} else return null;
+	}
+	
+	public void saveLearningSession(String learningSessionId, String learningSessionTitle) {
+		getDao().save(new LearningSessionPo(learningSessionId, learningSessionTitle));
+	}
+	
+	public void saveUserComment(UserCommentPo userComment) {
+		getDao().save(userComment);
+	}
+	
+	public boolean saveUserFeedback(UserRatingPo userFeedback) {
+		UserRatingPo examplePo = new UserRatingPo();
 		examplePo.setUserId(userFeedback.getUserId());
-		examplePo.setLearningSessionId(userFeedback.getLearningSessionId());
+		examplePo.setLearningSession(userFeedback.getLearningSession());
 		int countOf = getDao().getRecordCountForExample(examplePo);
 		
 		if(countOf == 1) {

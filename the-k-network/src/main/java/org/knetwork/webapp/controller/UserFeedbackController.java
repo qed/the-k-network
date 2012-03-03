@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.knetwork.webapp.BaseController;
-import org.knetwork.webapp.entity.hibernate.UserFeedbackPo;
+import org.knetwork.webapp.entity.hibernate.UserCommentPo;
+import org.knetwork.webapp.entity.hibernate.UserRatingPo;
 import org.knetwork.webapp.service.UserFeedbackService;
-import org.knetwork.webapp.util.SessionMapUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,13 +21,12 @@ public class UserFeedbackController extends BaseController {
 	
 	@RequestMapping(value = "user-feedback/rate")
     public String rate(final HttpSession session, final HttpServletRequest request, final Model model) throws MalformedURLException {
-    	String learningSessionId = SessionMapUtil.generateLearningSessionId();
 		String score = request.getParameter("score");
 		
-		UserFeedbackPo uf = new UserFeedbackPo();
+		UserRatingPo uf = new UserRatingPo();
 		uf.setRating(Integer.parseInt(score));
 		uf.setUserId((String)session.getAttribute("nickName"));
-		uf.setLearningSessionId(learningSessionId);
+		uf.setLearningSession(userFeedbackService.getLearningSession((String)session.getAttribute("learningSessionId")));
 		
 		logger.info("score " + uf.toString());
 		
@@ -37,6 +36,22 @@ public class UserFeedbackController extends BaseController {
 		} else {
 			model.addAttribute("ratingMessage","Rating saved, thanks!");
 		}
+		
+		return "user-feedback/view";
+	}
+	
+	@RequestMapping(value = "user-feedback/comment")
+    public String comment(final HttpSession session, final HttpServletRequest request, final Model model) throws MalformedURLException {
+		String comment = request.getParameter("comment");
+		
+		UserCommentPo uf = new UserCommentPo();
+		uf.setComment(comment);
+		uf.setUserId((String)session.getAttribute("nickName"));
+		uf.setLearningSession(userFeedbackService.getLearningSession((String)session.getAttribute("learningSessionId")));
+		
+		logger.info("score " + uf.toString());
+		
+		userFeedbackService.saveUserComment(uf);
 		
 		return "user-feedback/view";
 	}

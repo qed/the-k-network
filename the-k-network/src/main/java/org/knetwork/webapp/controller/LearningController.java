@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.knetwork.webapp.service.TokboxService;
+import org.knetwork.webapp.service.UserFeedbackService;
 import org.knetwork.webapp.util.SessionMapUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,11 +29,13 @@ public class LearningController {
 
 	private final TokboxService tokboxService;
 	private static final String PREFIX = "http://theknetwork.org/whiteboard";
+	private final UserFeedbackService userFeedbackService;
 
 	@Inject
-	public LearningController(TokboxService tokboxService) {
+	public LearningController(TokboxService tokboxService, UserFeedbackService userFeedbackService) {
 		super();
 		this.tokboxService = tokboxService;
+		this.userFeedbackService = userFeedbackService;
 	}
 
 	private String getWhiteboardSession(String learningSessionId,
@@ -72,6 +75,9 @@ public class LearningController {
 		model.addAttribute("learningSessionId", learningSessionId);
 		session.setAttribute("learningSessionId", learningSessionId);
 		String sessionTitle = (String) request.getParameter("sessionTitle");
+		
+		userFeedbackService.saveLearningSession(learningSessionId, sessionTitle);
+		
 		try {
 			Map<String, String> tokboxMap = tokboxService.createSession();
 			String tokboxSessionId = tokboxMap.get("tokboxSessionId");
@@ -163,7 +169,7 @@ public class LearningController {
 				.getParameter("learningSessionId");
 		String learningSessionId = (String) session
 				.getAttribute("learningSessionId");
-		if (!newLearningSessionId.equals(learningSessionId)) {
+		if (newLearningSessionId!=null && !newLearningSessionId.equals(learningSessionId)) {
 			session.setAttribute("learningSessionId", newLearningSessionId);
 			learningSessionId = newLearningSessionId;
 		}
