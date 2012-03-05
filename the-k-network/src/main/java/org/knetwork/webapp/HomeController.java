@@ -13,20 +13,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/")
 public class HomeController {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping("/")
     public String display(final HttpSession session, final HttpServletRequest request, final Model model) throws MalformedURLException {
+        return "home";
+    }
+    
+    @RequestMapping("home")
+    public String home(final HttpSession session, final HttpServletRequest request, final Model model) throws MalformedURLException {
         return "home";
     }
     
     @RequestMapping("logout")
     public String logout(HttpSession session) {
         session.removeAttribute("accessToken");
-        return "redirect:/";
+        return "home";
     }
 
 }

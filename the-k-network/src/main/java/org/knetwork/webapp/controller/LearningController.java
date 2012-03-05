@@ -32,7 +32,8 @@ public class LearningController {
 	private final UserFeedbackService userFeedbackService;
 
 	@Inject
-	public LearningController(TokboxService tokboxService, UserFeedbackService userFeedbackService) {
+	public LearningController(TokboxService tokboxService,
+			UserFeedbackService userFeedbackService) {
 		super();
 		this.tokboxService = tokboxService;
 		this.userFeedbackService = userFeedbackService;
@@ -41,8 +42,8 @@ public class LearningController {
 	private String getWhiteboardSession(String learningSessionId,
 			String username, String title, String joinOrCreate) {
 		StringBuilder builder = new StringBuilder();
-		builder.append(PREFIX+"/whiteboard/workplace");
-		
+		builder.append(PREFIX + "/whiteboard/workplace");
+
 		try {
 
 			URL url = new URL(
@@ -75,11 +76,13 @@ public class LearningController {
 		model.addAttribute("learningSessionId", learningSessionId);
 		session.setAttribute("learningSessionId", learningSessionId);
 		String sessionTitle = (String) request.getParameter("sessionTitle");
-		
-		userFeedbackService.saveLearningSession(learningSessionId, sessionTitle);
-		
+
+		userFeedbackService
+				.saveLearningSession(learningSessionId, sessionTitle);
+
 		try {
-			Map<String, String> tokboxMap = tokboxService.createSession(learningSessionId);
+			Map<String, String> tokboxMap = tokboxService
+					.createSession(learningSessionId);
 			String tokboxSessionId = tokboxMap.get("tokboxSessionId");
 			String moderatorToken = tokboxMap.get("moderatorToken");
 			SessionMapUtil.setSessionTitle(learningSessionId, sessionTitle);
@@ -87,12 +90,12 @@ public class LearningController {
 			model.addAttribute("tokboxSessionId", tokboxSessionId);
 			session.setAttribute("moderatorToken", moderatorToken);
 			session.setAttribute("tokboxSessionId", tokboxSessionId);
-			model.addAttribute("joinOrCreate","join");
-			
+			model.addAttribute("joinOrCreate", "join");
+
 			getWhiteboardSession(learningSessionId,
-							(String) session.getAttribute("nickName"),
-							sessionTitle, "create"); 
-			
+					(String) session.getAttribute("nickName"), sessionTitle,
+					"create");
+
 			session.setAttribute(
 					"whiteboardJoinUrl",
 					getWhiteboardSession(learningSessionId,
@@ -103,8 +106,7 @@ public class LearningController {
 			e.printStackTrace();
 		}
 
-		return String.format("redirect:/learn/join?learningSessionId=%s",
-				learningSessionId);
+		return String.format("learning/view");
 	}
 
 	@RequestMapping("learn/setNickName")
@@ -121,7 +123,7 @@ public class LearningController {
 		}
 
 		session.setAttribute("nickName", nick);
-		return String.format("redirect:/");
+		return String.format("home");
 	}
 
 	private String runCommand(String _command) {
@@ -160,14 +162,8 @@ public class LearningController {
 	public String displayLearningSession(final HttpSession session,
 			final HttpServletRequest request, final Model model)
 			throws MalformedURLException {
-		String newLearningSessionId = (String) request
-				.getParameter("learningSessionId");
 		String learningSessionId = (String) session
 				.getAttribute("learningSessionId");
-		if (newLearningSessionId!=null && !newLearningSessionId.equals(learningSessionId)) {
-			session.setAttribute("learningSessionId", newLearningSessionId);
-			learningSessionId = newLearningSessionId;
-		}
 		System.out.println("Loading pages with learning session: "
 				+ learningSessionId);
 		model.addAttribute("sessionTitle",
@@ -175,14 +171,14 @@ public class LearningController {
 		model.addAttribute("learningSessionId", learningSessionId);
 		model.addAttribute("meetingExists", true);
 		model.addAttribute("joinOrCreate", "join");
-		
+
 		session.setAttribute(
 				"whiteboardJoinUrl",
 				getWhiteboardSession(learningSessionId,
 						(String) session.getAttribute("nickName"),
 						SessionMapUtil.getSessionTitle(learningSessionId),
 						"join"));
-		
+
 		return "learning/view";
 	}
 

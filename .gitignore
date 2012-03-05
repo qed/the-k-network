@@ -623,3 +623,12 @@
 /the-k-network/target/knetwork-1.0.0/WEB-INF/web.xml
 /the-k-network/target/m2e-wtp/web-resources/META-INF/maven/org.knetwork/knetwork/pom.properties
 /the-k-network/target/m2e-wtp/web-resources/META-INF/maven/org.knetwork/knetwork/pom.xml
+/the-k-network/derbyDB/seg0/.gitignore
+/the-k-network/target/classes/org/knetwork/webapp/controller/LoginController.class
+/the-k-network/target/classes/org/knetwork/webapp/entity/hibernate/LearningSessionPo.class
+/the-k-network/target/classes/org/knetwork/webapp/entity/hibernate/LearningSessionPo.hbm.xml
+/the-k-network/target/classes/org/knetwork/webapp/entity/hibernate/UserCommentPo.class
+/the-k-network/target/classes/org/knetwork/webapp/entity/hibernate/UserCommentPo.hbm.xml
+/the-k-network/target/classes/org/knetwork/webapp/entity/hibernate/UserRatingPo.class
+/the-k-network/target/classes/org/knetwork/webapp/entity/hibernate/UserRatingPo.hbm.xml
+/the-k-network/target/classes/org/knetwork/webapp/model/ExerciseContainer$1.class

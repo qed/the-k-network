@@ -18,14 +18,14 @@
 		 --%>
 		 
 		<c:if test="${!sessionScope.isLoggedIn}">
-			<a class="btn btn-primary" href="/login">Login</a>
+			<a class="btn btn-primary" href="login">Login</a>
 		</c:if>
 		</p>
 
       </div>
 
       <c:if test="${sessionScope.isLoggedIn}">
-			<%@ include file="includes/users_and_sessions.jsp" %>
+			<jsp:include page="includes/users_and_sessions.jsp" />
       </c:if>
 	  
 	  <c:if test="${!sessionScope.isLoggedIn}">

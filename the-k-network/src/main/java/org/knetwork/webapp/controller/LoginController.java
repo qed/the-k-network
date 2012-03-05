@@ -19,7 +19,7 @@ public class LoginController {
 			throws MalformedURLException {
 		
 		session.setAttribute("isLoggedIn", true);
-		return "redirect:/";
+		return "home";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)

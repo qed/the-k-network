@@ -12,7 +12,7 @@
 		var token = '${userToken}';
 </script>
 
-<script type="text/javascript" src="/resources/js/knetwork-tokbox.js"></script>
+<script type="text/javascript" src="resources/js/knetwork-tokbox.js"></script>
 	
 <div id="subscribers"></div>
 </div>	
