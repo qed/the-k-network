@@ -5,7 +5,6 @@
     height: 80px;
   }
 </style>
-<div id="tokboxContainer">
 <script type="text/javascript" charset="utf-8">
 	// set up the globals used by the next included js file
 		var apiKey = ${apiKey};

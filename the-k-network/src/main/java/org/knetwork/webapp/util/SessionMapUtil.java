@@ -65,10 +65,7 @@ public class SessionMapUtil {
 
 	public static void addTokboxSessionId(String learningSessionId,
 			String tokboxSessionId) {
-		if (!tokboxSessionExists(learningSessionId)) {
-			sessionMap.get(learningSessionId).put(TOKBOX, tokboxSessionId);
-		}
-
+		sessionMap.get(learningSessionId).put(TOKBOX, tokboxSessionId);
 	}
 
 	public static List<LearningSession> getLearningSessions() {
