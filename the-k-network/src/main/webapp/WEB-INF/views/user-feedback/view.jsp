@@ -10,7 +10,7 @@
 			    $.ajax({
 			    	url:"/user-feedback/rate?score="+score
 			    });
-			    $("#messageRating").html("You just rated us " + score);
+			    $("#messageRating").html("Thanks for rating!");
 			  }
 			});
 		</script>
@@ -20,7 +20,7 @@
 	</div>
 
 	<div id="commentThisSessionDiv" class="pull-right">
-		<b>What did you think?</b>
+		<b>What do you think?</b>
 		<div id="comment">
 			<form id="commentForm">
 				<textarea rows="3" cols="10" id="commentText"></textarea><br/>
