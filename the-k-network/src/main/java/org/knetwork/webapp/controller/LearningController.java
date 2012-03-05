@@ -79,15 +79,10 @@ public class LearningController {
 		userFeedbackService.saveLearningSession(learningSessionId, sessionTitle);
 		
 		try {
-			Map<String, String> tokboxMap = tokboxService.createSession();
+			Map<String, String> tokboxMap = tokboxService.createSession(learningSessionId);
 			String tokboxSessionId = tokboxMap.get("tokboxSessionId");
 			String moderatorToken = tokboxMap.get("moderatorToken");
-			SessionMapUtil.addTokboxSessionId(learningSessionId,
-					tokboxSessionId);
 			SessionMapUtil.setSessionTitle(learningSessionId, sessionTitle);
-
-			System.out.println("Adding tokbox session id:" + tokboxSessionId
-					+ " to learning session:" + learningSessionId);
 
 			model.addAttribute("tokboxSessionId", tokboxSessionId);
 			session.setAttribute("moderatorToken", moderatorToken);

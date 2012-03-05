@@ -24,6 +24,7 @@ var session;
 			to allow the page from communicating with SWF content loaded from the web. For more information,
 			see http://www.tokbox.com/opentok/build/tutorials/helloworld.html#localTest
 			*/
+			alert(token);
 			session.connect(apiKey, token);
 		}
 

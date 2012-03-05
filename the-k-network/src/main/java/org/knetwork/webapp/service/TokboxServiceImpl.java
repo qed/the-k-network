@@ -3,6 +3,7 @@ package org.knetwork.webapp.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.knetwork.webapp.util.SessionMapUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class TokboxServiceImpl implements TokboxService {
 	 * @see org.knetwork.webapp.service.TokboxService#createSession()
 	 */
 	@Override
-	public Map<String, String> createSession() throws OpenTokException {
+	public Map<String, String> createSession(String learningSessionId) throws OpenTokException {
 		this.sdk = new OpenTokSDK(apiKey, apiSecret);
 		
 		String s = sdk.generate_token("session");
@@ -51,6 +52,11 @@ public class TokboxServiceImpl implements TokboxService {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("tokboxSessionId", oSession.session_id);
 		map.put("moderatorToken", moderatorToken);
+		
+		SessionMapUtil.addTokboxSessionId(learningSessionId, oSession.session_id);
+		
+		System.out.println("Added tokbox session id:" + SessionMapUtil.getTokboxSessionId(learningSessionId)
+				+ " to learning session:" + learningSessionId);
 		
 		return map;
 	}
