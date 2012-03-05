@@ -381,7 +381,7 @@
 				<version>8.0.0.M3</version>
 				<configuration>
 					<webAppConfig>
-						<contextPath>/knetwork</contextPath>
+						<contextPath>/</contextPath>
 					</webAppConfig>
 					<webAppSourceDirectory>${basedir}/src/main/webapp</webAppSourceDirectory>
 					<scanIntervalSeconds>1</scanIntervalSeconds>

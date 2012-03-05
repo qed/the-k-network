@@ -41,8 +41,7 @@
 				<li><a href="#mission">Our Mission</a></li>
 				<li><a href="#team">Our Team</a></li>
 				<li><a href="#contact">Contact Us</a></li>
-				<li><a href="#"><div id="welcomeMessageDiv"><b>Logged in as ${sessionScope.nickName}</b></a>
-</div></li>
+				<li><a href="#"><div id="welcomeMessageDiv"><c:if test="${sessionScope.hasNickName}"><b>Logged in as ${sessionScope.nickName}</b></c:if></a></div></li>
 				<%--
 				<c:if test="${loggedIn}">
 					<li><a href="/logout">Logout</a></li>
