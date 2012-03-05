@@ -1,7 +1,7 @@
 <%@ include file="../../standard-include.jspf" %>
 
-	<div id="rateThisSessionDiv">
-		<b>Rate this Session</b>
+	<div id="rateThisSessionDiv" class="pull-left" style="margin-left: 10px;">
+		<b>Rate this Session</b> 
 		<div id="star"></div>
 		
 		<script type="text/javascript">
@@ -18,15 +18,15 @@
 		<div id="messageRating">
 		</div>
 	</div>
-	<br/>
-	
-	<div id="commentThisSessionDiv">
-		<b>Comment about this Service/Session</b>
+
+	<div id="commentThisSessionDiv" class="pull-right">
+		<b>What did you think?</b>
 		<div id="comment">
 			<form id="commentForm">
 				<textarea rows="3" cols="10" id="commentText"></textarea><br/>
-				<a href="#" onclick="saveComment()" class="btn btn-primary" >Save</a>
-			</form>
+				<a href="#" onclick="saveComment()" class="btn btn-primary pull-left" >Save</a>
+			</form>		<div id="messageComment" class="pull-left" style="margin-top:-11px; margin-left: 20px;">
+		</div>
 		</div>
 		
 		<script type="text/javascript">
@@ -35,8 +35,7 @@
 			    	url:"/user-feedback/comment?comment="+$("#commentText").val()
 			    });
 			    $("#messageComment").html("Thanks!");
-			}
+				}
 		</script>
-		<div id="messageComment">
-		</div>
+
 	</div>

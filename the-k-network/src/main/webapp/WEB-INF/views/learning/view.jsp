@@ -1,21 +1,15 @@
 <jsp:include page="../shared/header.jsp" />
 
-<table cellpadding="5">
-	<tr>
-		<td valign="top">
-			<div id="welcomeMessageDiv"><b>Welcome, ${sessionScope.nickName}</b></div><br/>
-			<div id="tokboxIncludeDiv">
-				<jsp:include page="../tokbox/include.jsp"/>
-			</div>
-		</td>
-		<td valign="top">
-			<div id="userFeedbackIncludeDiv">
-				<jsp:include page="../user-feedback/view.jsp" />
-			</div>
-		</td>
-	</tr>
-</table>
-<br/><br/>
+<div class="span4 pull-left">
+
+	<div id="tokboxIncludeDiv" class="span4">
+	    <jsp:include page="../tokbox/include.jsp"/>
+	</div>
+	<div id="userFeedbackIncludeDiv" class="span5 alert alert-info">
+	    <jsp:include page="../user-feedback/view.jsp" />
+	</div>
+	
+</div>		
 
 <div id="whiteboardFrameDiv">
 	<iframe name="inlineframe" src="/learn/whiteboard" 
