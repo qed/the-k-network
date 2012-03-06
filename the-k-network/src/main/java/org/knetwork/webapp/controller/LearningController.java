@@ -19,6 +19,7 @@ import org.knetwork.webapp.util.SessionMapUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.opentok.exception.OpenTokException;
 
@@ -78,7 +79,7 @@ public class LearningController {
 
 	@RequestMapping("learn/setNickName")
 	public String setNickName(final HttpSession session,
-			final HttpServletRequest request, final Model model)
+			final HttpServletRequest request, final Model model, @RequestParam("returnTo") String returnTo)
 			throws MalformedURLException {
 		String nick = request.getParameter("nickName");
 
@@ -90,7 +91,7 @@ public class LearningController {
 		}
 
 		session.setAttribute("nickName", nick);
-		return String.format("home");
+		return String.format("redirect:" + returnTo);
 	}
 
 	private String runCommand(String _command) {

@@ -17,16 +17,11 @@
 			<a class="btn btn-primary btn-large" href="${requestTokenUrl}">Join our Network!</a>
 		 --%>
 		 
-		<c:if test="${!sessionScope.isLoggedIn}">
-			<a class="btn btn-primary" href="login">Login</a>
-		</c:if>
 		</p>
 
       </div>
 
-      <c:if test="${sessionScope.isLoggedIn}">
-			<jsp:include page="includes/users_and_sessions.jsp" />
-      </c:if>
+	  <jsp:include page="includes/users_and_sessions.jsp" />
 	  
 	  <c:if test="${!sessionScope.isLoggedIn}">
 	      <!-- Example row of columns -->

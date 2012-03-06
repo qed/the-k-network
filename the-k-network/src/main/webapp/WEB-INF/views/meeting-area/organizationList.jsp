@@ -6,7 +6,7 @@
 	<h3>Organizations</h3>
 	
 	<c:forEach items="${organizations}" var="org">
-		<b><a href="class-congregation/${org.orgId}"/>${org.orgTitle}</a></b>
+		<b><a href="team/${org.orgId}"/>${org.orgTitle}</a></b>
 		<br />
 		<br />
 	</c:forEach>

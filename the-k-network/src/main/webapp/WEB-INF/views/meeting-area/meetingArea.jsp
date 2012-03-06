@@ -5,16 +5,16 @@
 <div class="container">
 	<h3>Meeting Area</h3>
 	
-	
 	<div id="whiteboardChatDiv">
+	<c:if test="${sessionScope.hasNickName}">
+	
 	<iframe name="inlineframe" src="${whiteboardJoinUrl}" 
 			frameborder="0" scrolling="no" 
 			width="340" height="400"
 			marginwidth="3" marginheight="0" ></iframe>
+	</c:if>
 
-	<c:if test="${sessionScope.isLoggedIn}">
-		<jsp:include page="../includes/users_and_sessions.jsp" />
-    </c:if>
+	<jsp:include page="../includes/users_and_sessions.jsp" />
 
 	</div>
 </div>

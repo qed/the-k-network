@@ -22,7 +22,7 @@ public class MeetingAreaController {
 	private OrgService orgService;
 	private static final String PREFIX = "http://theknetwork.org/whiteboard";
 	
-	@RequestMapping("class-congregation/{organization}")
+	@RequestMapping("team/{organization}")
 	public String joinMeetingArea(final HttpSession session,
 			final HttpServletRequest request, final Model model,
 			@PathVariable("organization") String organization)
@@ -31,6 +31,8 @@ public class MeetingAreaController {
 		SessionMapUtil.initWhiteboardSessionForChat(session, organization,
 				(String) session.getAttribute("nickName"), "Group%20Chat",
 				"create", PREFIX);
+		
+		model.addAttribute("returnTo", "/team/" + organization);
 		
 		return "meeting-area/meetingArea";
 	}

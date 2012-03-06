@@ -58,7 +58,9 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
 		String nickname = (String)request.getParameter("nickName");
 		if(nickname==null) nickname = (String)session.getAttribute("nickName");
 		
-		if(modelAndView!=null) modelAndView.addObject("loggedIn", accessToken != null);
+		if(nickname==null) session.setAttribute("hasNickName",false);
+		
+		if(modelAndView!=null) modelAndView.addObject("loggedIn", true);
         
 		/*
 		if (accessToken == null) {

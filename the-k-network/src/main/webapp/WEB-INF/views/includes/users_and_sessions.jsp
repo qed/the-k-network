@@ -1,7 +1,6 @@
 <%@ include file="../../standard-include.jspf"%>
 	<div class="row">
 		<div class="column span6">
-		
 			<div id="sessionCreateDiv">
 				<c:if test="${sessionScope.hasNickName}">
 					<h4>Create your own Session</h4>
@@ -24,6 +23,7 @@
 						action="learn/setNickName">
 						<input type="text" class="span3"
 							placeholder="New Nickname" id="nickName" name="nickName" value="${sessionScope.nickName}">
+						<input type="hidden" name="returnTo" value="${returnTo}"/>							
 						<br /> 
 						<button type="submit" name="Save" value="Save" class="btn btn-primary">Save</button>
 					</form>
@@ -37,6 +37,7 @@
 						<label>Nickname</label>
 						<input type="text" class="span3"
 							placeholder="Nickname" id="nickName" name="nickName" value="${sessionScope.nickName}">
+						<input type="hidden" name="returnTo" value="${returnTo}"/>
 						<br /> 
 						<button type="submit" name="Save" value="Save" class="btn btn-primary">Save</button>
 					</form>

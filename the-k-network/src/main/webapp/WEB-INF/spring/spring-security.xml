@@ -7,6 +7,7 @@
                         http://www.springframework.org/schema/security
                          http://www.springframework.org/schema/security/spring-security-2.0.1.xsd">
 
+	<!-- 
 	<http auto-config="true">
 	    <intercept-url pattern="/learn/**" access="ROLE_USER" />
 	    <intercept-url pattern="/user-feedback/**" access="ROLE_USER" />
@@ -24,4 +25,5 @@
             <user name="knet" password="ea9ffb6eb4a5f167f6a29e1140b39165d47734fd" authorities="ROLE_USER" />
         </user-service>
     </authentication-provider>
+    -->
 </beans:beans>
