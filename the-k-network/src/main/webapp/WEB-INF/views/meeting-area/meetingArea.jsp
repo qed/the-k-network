@@ -14,7 +14,7 @@
 			marginwidth="3" marginheight="0" ></iframe>
 	</c:if>
 
-	<jsp:include page="../includes/users_and_sessions.jsp" />
+	<jsp:include page="../includes/team_users_and_sessions.jsp" />
 
 	</div>
 </div>
