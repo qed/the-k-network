@@ -12,10 +12,11 @@
 </div>		
 
 <div id="whiteboardFrameDiv">
-	<iframe name="inlineframe" src="/learn/whiteboard" 
+	<iframe name="inlineframe" src="learn/whiteboard" 
 			frameborder="0" scrolling="auto" 
 			width="100%" height="680"
 			marginwidth="3" marginheight="0" ></iframe>
+
 </div>
 
 <jsp:include page="../shared/footer.jsp" />

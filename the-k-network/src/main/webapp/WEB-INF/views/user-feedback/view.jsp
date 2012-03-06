@@ -8,7 +8,7 @@
 			$('#star').raty({
 			  click: function(score, evt) {
 			    $.ajax({
-			    	url:"/user-feedback/rate?score="+score
+			    	url:"user-feedback/rate?score="+score
 			    });
 			    $("#messageRating").html("Thanks for rating!");
 			  }
@@ -32,7 +32,7 @@
 		<script type="text/javascript">
 			function saveComment() {
 			    $.ajax({
-			    	url:"/user-feedback/comment?comment="+$("#commentText").val()
+			    	url:"user-feedback/comment?comment="+$("#commentText").val()
 			    });
 			    $("#messageComment").html("Thanks!");
 				}

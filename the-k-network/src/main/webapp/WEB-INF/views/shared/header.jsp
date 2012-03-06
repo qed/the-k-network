@@ -5,7 +5,8 @@
 <!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
 <!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
-	<link REL="SHORTCUT ICON" HREF="/resources/img/light-bulb-icon.png">
+    <base href="/">
+	<link REL="SHORTCUT ICON" HREF="resources/img/light-bulb-icon.png">
 
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -18,11 +19,11 @@
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	
-	<link rel="stylesheet" href="/resources/css/bootstrap.css">
-	<link rel="stylesheet" href="/resources/css/knetwork.css">
+	<link rel="stylesheet" href="resources/css/bootstrap.css">
+	<link rel="stylesheet" href="resources/css/knetwork.css">
 	
-	<script type="text/javascript" src="/resources/js/lib/jquery-1.7.1.js"></script>
-	<script type="text/javascript" src="/resources/js/lib/raty/js/jquery.raty.js"></script>
+	<script type="text/javascript" src="resources/js/lib/jquery-1.7.1.js"></script>
+	<script type="text/javascript" src="resources/js/lib/raty/js/jquery.raty.js"></script>
 	<script src="http://staging.tokbox.com/v0.91/js/TB.min.js"></script>
 	
 	<script type="text/javascript">
@@ -39,11 +40,15 @@
 				<li><a href="#mission">Our Mission</a></li>
 				<li><a href="#team">Our Team</a></li>
 				<li><a href="#contact">Contact Us</a></li>
+<<<<<<< HEAD
 				<li>
 					<a href="#">
 						<div id="welcomeMessageDiv">Logged in as ${sessionScope.nickName}</div>
 					</a>
 				</li>
+=======
+				<li><a href="#"><div id="welcomeMessageDiv"><c:if test="${sessionScope.hasNickName}"><b>Logged in as ${sessionScope.nickName}</b></c:if></a></div></li>
+>>>>>>> 50e13c6dea9f6745dde98b8f578c54b812d5e385
 				<%--
 				<c:if test="${loggedIn}">
 					<li><a href="/logout">Logout</a></li>
