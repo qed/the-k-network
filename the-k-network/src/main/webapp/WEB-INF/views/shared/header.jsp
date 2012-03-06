@@ -41,11 +41,15 @@
 				<li><a href="#team">Our Team</a></li>
 				<li><a href="#contact">Contact Us</a></li>
 <<<<<<< HEAD
+<<<<<<< HEAD
 				<li>
 					<a href="#">
 						<div id="welcomeMessageDiv">Logged in as ${sessionScope.nickName}</div>
 					</a>
 				</li>
+=======
+				<li><a href="#"><div id="welcomeMessageDiv"><c:if test="${sessionScope.hasNickName}"><b>Logged in as ${sessionScope.nickName}</b></c:if></a></div></li>
+>>>>>>> 50e13c6dea9f6745dde98b8f578c54b812d5e385
 =======
 				<li><a href="#"><div id="welcomeMessageDiv"><c:if test="${sessionScope.hasNickName}"><b>Logged in as ${sessionScope.nickName}</b></c:if></a></div></li>
 >>>>>>> 50e13c6dea9f6745dde98b8f578c54b812d5e385
