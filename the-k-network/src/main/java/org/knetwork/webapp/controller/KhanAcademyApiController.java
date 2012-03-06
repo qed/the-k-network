@@ -25,6 +25,7 @@ public class KhanAcademyApiController {
         oAuthService = service;
     }
 
+    /*
     @RequestMapping(OAuthConstants.CALLBACK)
     public String handleCallback(final HttpSession session, @RequestParam("oauth_token") final String token,
             @RequestParam("oauth_token_secret") final String secret, @RequestParam("oauth_verifier") final String verifier) {
@@ -35,5 +36,6 @@ public class KhanAcademyApiController {
         logger.debug("Received access token:" + accessToken);
         return "redirect:/";
     }
+    */
 
 }

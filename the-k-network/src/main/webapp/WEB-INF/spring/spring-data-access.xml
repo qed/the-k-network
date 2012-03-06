@@ -23,8 +23,7 @@
 
 	<tx:annotation-driven />
 
-	<!-- 
-	-->
+	<!-- -->
 	<bean id="dataSource" 
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
@@ -35,17 +34,16 @@
 	 
 	 
 	 <!-- For use on a java app server
-	 
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 	    <property name="jndiName" value="jdbc/knetwork"/>
-	</bean>
-	-->
+	</bean> -->
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		 <property name="mappingResources">
 	      <list>
+	        <value>/org/knetwork/webapp/entity/hibernate/OrganizationPo.hbm.xml</value>
 	        <value>/org/knetwork/webapp/entity/hibernate/LearningSessionPo.hbm.xml</value>
 	        <value>/org/knetwork/webapp/entity/hibernate/UserRatingPo.hbm.xml</value>
 	        <value>/org/knetwork/webapp/entity/hibernate/UserCommentPo.hbm.xml</value>

@@ -10,10 +10,10 @@ import javax.servlet.http.HttpSession;
 import org.knetwork.webapp.entity.User;
 import org.knetwork.webapp.model.ExerciseContainer;
 import org.knetwork.webapp.oauth.KhanOAuthService;
+import org.knetwork.webapp.service.LearningSessionService;
 import org.knetwork.webapp.service.TokboxService;
 import org.knetwork.webapp.util.ApiHelper;
 import org.knetwork.webapp.util.KhanAcademyApi;
-import org.knetwork.webapp.util.SessionMapUtil;
 import org.scribe.model.OAuthConstants;
 import org.scribe.model.Token;
 import org.slf4j.Logger;
@@ -37,6 +37,7 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
 	private KhanOAuthService oauthService;
     private KhanAcademyApi api;
     private TokboxService tokboxService;
+    private LearningSessionService learningSessionService;
 	
 	@Override
 	public void afterCompletion(HttpServletRequest request,
@@ -58,7 +59,9 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
 		if(nickname==null) nickname = (String)session.getAttribute("nickName");
 		
 		if(modelAndView!=null) modelAndView.addObject("loggedIn", accessToken != null);
-        if (accessToken == null) {
+        
+		/*
+		if (accessToken == null) {
             String authority = new URL(request.getRequestURL().toString()).getAuthority();
             final String callbackUrl = String.format("http://%s/%s", authority, OAuthConstants.CALLBACK);
             logger.debug("Callback url for OAuth is: " + callbackUrl);
@@ -71,6 +74,8 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
 	        if(modelAndView!=null) modelAndView.addObject("user", user);
 	        nickname = user.getNickname();
         }
+        */
+        
         
         if(modelAndView!=null) {
             if(nickname!=null && nickname.length() > 0) {
@@ -79,7 +84,7 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
             } else {
             	session.setAttribute("hasNickName", false);
             }
-        	modelAndView.addObject("learningSessions",SessionMapUtil.getLearningSessions());
+        	modelAndView.addObject("learningSessions",learningSessionService.getLearningSessions());
         }
 	}
 	
@@ -116,6 +121,16 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
 	@Inject
 	public void setTokboxService(TokboxService tokboxService) {
 		this.tokboxService = tokboxService;
+	}
+
+	public LearningSessionService getLearningSessionService() {
+		return learningSessionService;
+	}
+
+	@Inject
+	public void setLearningSessionService(
+			LearningSessionService learningSessionService) {
+		this.learningSessionService = learningSessionService;
 	}
 
 }

@@ -5,8 +5,6 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -39,35 +37,6 @@ public class LearningController {
 		this.userFeedbackService = userFeedbackService;
 	}
 
-	private String getWhiteboardSession(String learningSessionId,
-			String username, String title, String joinOrCreate) {
-		StringBuilder builder = new StringBuilder();
-		builder.append(PREFIX + "/whiteboard/workplace");
-
-		try {
-
-			URL url = new URL(
-					PREFIX+"/api/"
-							+ joinOrCreate + "?sessionId=" + learningSessionId
-							+ "&title=" + title + "&username=" + username);
-			URLConnection conn = url.openConnection();
-
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					conn.getInputStream()));
-			String inputLine;
-
-			while ((inputLine = in.readLine()) != null) {
-				builder.append(inputLine);
-			}
-			in.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println(builder.toString());
-		return builder.toString();
-	}
-
 	@RequestMapping("learn/createMeeting")
 	public String createNewMeeting(final HttpSession session,
 			final HttpServletRequest request, final Model model)
@@ -92,16 +61,14 @@ public class LearningController {
 			session.setAttribute("tokboxSessionId", tokboxSessionId);
 			model.addAttribute("joinOrCreate", "join");
 
-			getWhiteboardSession(learningSessionId,
+			SessionMapUtil.initWhiteboardSession(session, learningSessionId,
 					(String) session.getAttribute("nickName"), sessionTitle,
-					"create");
+					"create", PREFIX);
 
-			session.setAttribute(
-					"whiteboardJoinUrl",
-					getWhiteboardSession(learningSessionId,
-							(String) session.getAttribute("nickName"),
-							SessionMapUtil.getSessionTitle(learningSessionId),
-							"join"));
+			SessionMapUtil.initWhiteboardSession(session, learningSessionId,
+					(String) session.getAttribute("nickName"), sessionTitle,
+					"join", PREFIX);
+			
 		} catch (OpenTokException e) {
 			e.printStackTrace();
 		}
@@ -172,12 +139,9 @@ public class LearningController {
 		model.addAttribute("meetingExists", true);
 		model.addAttribute("joinOrCreate", "join");
 
-		session.setAttribute(
-				"whiteboardJoinUrl",
-				getWhiteboardSession(learningSessionId,
-						(String) session.getAttribute("nickName"),
-						SessionMapUtil.getSessionTitle(learningSessionId),
-						"join"));
+		SessionMapUtil.initWhiteboardSession(session, learningSessionId,
+				(String) session.getAttribute("nickName"), SessionMapUtil.getSessionTitle(learningSessionId),
+				"join", PREFIX);
 
 		return "learning/view";
 	}
