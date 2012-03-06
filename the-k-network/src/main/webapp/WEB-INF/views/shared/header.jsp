@@ -33,24 +33,18 @@
 
 <body>
 <div class="navbar navbar-fixed-top">
-     	<div class="navbar-inner">
+    <div class="navbar-inner">
 		<div class="container">
 			<a class="brand" href="#"><fmt:message key="site.title"/></a>
 			<ul class="nav">
 				<li><a href="#mission">Our Mission</a></li>
 				<li><a href="#team">Our Team</a></li>
 				<li><a href="#contact">Contact Us</a></li>
-				<li>
+				<li class="pull-right">
 					<a href="#">
-						<div id="welcomeMessageDiv">Logged in as ${sessionScope.nickName}</div>
+						<div id="welcomeMessageDiv"><c:if test="${sessionScope.hasNickName}"><b>Logout</b></c:if></div>
 					</a>
 				</li>
-				<li><a href="#"><div id="welcomeMessageDiv"><c:if test="${sessionScope.hasNickName}"><b>Logged in as ${sessionScope.nickName}</b></c:if></a></div></li>
-				<%--
-				<c:if test="${loggedIn}">
-					<li><a href="/logout">Logout</a></li>
-				</c:if>
-				 --%>
 			</ul>
 		</div>
 	</div>

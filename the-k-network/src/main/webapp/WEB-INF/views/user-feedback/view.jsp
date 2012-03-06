@@ -19,7 +19,7 @@
 		</div>
 	</div>
 
-	<div id="commentThisSessionDiv" class="pull-right">
+	<div id="commentThisSessionDiv" class="pull-right" style="margin-left:25px">
 		<b>What do you think?</b>
 		<div id="comment">
 			<form id="commentForm">
@@ -35,7 +35,7 @@
 			    	url:"user-feedback/comment?comment="+$("#commentText").val()
 			    });
 			    $("#messageComment").html("Thanks!");
-				}
+			}	
 		</script>
 
 	</div>
