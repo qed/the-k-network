@@ -43,10 +43,11 @@
 					</form>
 				</c:if>
 			</div>
-		</div>	
+		</div>
+		<c:if test="${sessionScope.hasNickName}">	
 		<div class="column span6">
 			<div id="existingSessionsDiv">
-				<h4>Existing Sessions</h4>
+				<h4>Select a Session to Join</h4>
 				<br />
 				<c:forEach items="${learningSessions}" var="lSession">
 					<c:if test="${sessionScope.hasNickName}">
@@ -60,4 +61,5 @@
 				</c:forEach>
 			</div>
 		</div>
+		</c:if>
 	</div>

@@ -3,17 +3,17 @@
 <jsp:include page="../shared/header.jsp" />
 
 <div class="container">
-	<h3>Add an Organization</h3>
+	<h3>Add a Team</h3>
 	
 	<form id="createOrgForm" method="post"
 		action="save-org">
-		<label>Organization ID (Preferably one word, no spaces)</label>
+		<label>Use one word, no spaces.  The URL will be shared as: "theknetwork.org/team/{name}"</label>
 		<input type="text" class="span3"
-			placeholder="Organization ID" id="orgId" name="orgId"/>
+			placeholder="Team URL" id="orgId" name="orgId"/>
 		<br /> 
-		<label>Organization Title</label>
+		<label>This can be multiple words and will be shown in of the app's User Interface</label>
 		<input type="text" class="span3"
-			placeholder="Organization Title" id="orgTitle" name="orgTitle"/>
+			placeholder="Team Title" id="orgTitle" name="orgTitle"/>
 		<br /> 
 		<button type="submit" name="Save" value="Save" class="btn btn-primary">Save</button>
 	</form>

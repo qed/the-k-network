@@ -38,10 +38,7 @@
 		<div class="container">
 			<a class="brand" href="#"><fmt:message key="site.title"/></a>
 			<ul class="nav">
-				<li><a href="#mission">Our Mission</a></li>
-				<li><a href="#team">Our Team</a></li>
-				<li><a href="#contact">Contact Us</a></li>
-				<li class="pull-right">
+				<li class="pull-right offset8">
 					<a href="#">
 						<div id="welcomeMessageDiv"><c:if test="${sessionScope.hasNickName}"><b>Logout</b></c:if></div>
 					</a>
