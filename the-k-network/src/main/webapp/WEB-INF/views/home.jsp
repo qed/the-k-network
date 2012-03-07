@@ -21,7 +21,6 @@
 
       </div>
 
-	  <jsp:include page="includes/users_and_sessions.jsp" />
 	  
 	  <c:if test="${!sessionScope.isLoggedIn}">
 	      <!-- Example row of columns -->
