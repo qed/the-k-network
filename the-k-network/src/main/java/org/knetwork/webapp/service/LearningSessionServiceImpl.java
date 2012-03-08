@@ -17,7 +17,7 @@ public class LearningSessionServiceImpl extends GenericServiceImpl implements Le
 	 */
 	public List<LearningSession> getLearningSessions() {
 		Calendar nowCal = Calendar.getInstance();
-		nowCal.add(Calendar.MINUTE, 45);
+		nowCal.add(Calendar.MINUTE, -45);
 		
 		List<LearningSession> sessions = new ArrayList<LearningSession>();
 		for (String key : SessionMapUtil.sessionMap.keySet()) {
@@ -25,7 +25,7 @@ public class LearningSessionServiceImpl extends GenericServiceImpl implements Le
 			if(foundLs!=null && foundLs.getSessionDate() != null) {
 				Calendar sessionCal = Calendar.getInstance();
 				sessionCal.setTime(foundLs.getSessionDate());
-				if(!sessionCal.after(nowCal)) {
+				if(!sessionCal.before(nowCal)) {
 					sessions.add(new LearningSession(foundLs.getLearningSessionId(), foundLs.getLearningSessionTitle()));
 				}
 			}
