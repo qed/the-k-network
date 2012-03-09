@@ -2,5 +2,5 @@
 <div id="tokbox">
 </div>
 <script type="text/javascript">
-	// $("#tokbox").load("/tokbox/join");	
+	$("#tokbox").load("/tokbox/join");	
 </script>

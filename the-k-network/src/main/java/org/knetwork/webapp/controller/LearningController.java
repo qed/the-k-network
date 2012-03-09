@@ -128,10 +128,8 @@ public class LearningController {
 
 	@RequestMapping("learn/join")
 	public String displayLearningSession(final HttpSession session,
-			final HttpServletRequest request, final Model model)
+			final HttpServletRequest request, final Model model, @RequestParam("learningSessionId") String learningSessionId)
 			throws MalformedURLException {
-		String learningSessionId = (String) session
-				.getAttribute("learningSessionId");
 		System.out.println("Loading pages with learning session: "
 				+ learningSessionId);
 		model.addAttribute("sessionTitle",
@@ -140,6 +138,8 @@ public class LearningController {
 		model.addAttribute("meetingExists", true);
 		model.addAttribute("joinOrCreate", "join");
 
+		session.setAttribute("learningSessionId", learningSessionId);
+		
 		SessionMapUtil.initWhiteboardSession(session, learningSessionId,
 				(String) session.getAttribute("nickName"), SessionMapUtil.getSessionTitle(learningSessionId),
 				"join", PREFIX);

@@ -24,6 +24,7 @@ var session;
 			to allow the page from communicating with SWF content loaded from the web. For more information,
 			see http://www.tokbox.com/opentok/build/tutorials/helloworld.html#localTest
 			*/
+			// document.getElementById("call-status").innerHTML = "Connecting audio...";
 			session.connect(apiKey, token);
 		}
 

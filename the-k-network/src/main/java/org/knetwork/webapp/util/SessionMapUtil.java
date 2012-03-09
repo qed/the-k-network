@@ -23,7 +23,7 @@ public class SessionMapUtil {
 	private static final String TOKBOX = "TOKBOX";
 	private static final String SESSION_TITLE = "SESSION_TITLE";
 
-	public static Map<String, Map<String, String>> sessionMap = new Hashtable<String, Map<String, String>>();
+	public final static Map<String, Map<String, String>> sessionMap = new Hashtable<String, Map<String, String>>();
 
 	public static String initWhiteboardSession(HttpSession session, String learningSessionId,
 			String username, String title, String joinOrCreate, String prefix) {
@@ -118,6 +118,7 @@ public class SessionMapUtil {
 	}
 	
 	private static boolean isLearningSessionMapped(String learningSessionId) {
+		System.out.println(sessionMap.size());
 		return sessionMap.get(learningSessionId) != null;
 	}
 
