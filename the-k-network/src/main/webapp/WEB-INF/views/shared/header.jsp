@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ include file="../../standard-include.jspf" %>
 <!doctype html>
 <!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
@@ -47,7 +46,6 @@
 		</div>
 	</div>
 </div>
-=======
 <%@ include file="../../standard-include.jspf" %>
 <!doctype html>
 <!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
@@ -97,4 +95,3 @@
 		</div>
 	</div>
 </div>
->>>>>>> aed1f8512fa65ccb27f373b295e31beaf91f5fef
